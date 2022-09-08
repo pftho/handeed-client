@@ -2,17 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 
-function navBar() {
+function Navbar() {
     return (
         <nav>
-            <Link to="/signup">
-                <button>Sign Up</button>{' '}
+            <Link to="/auth/signup">
+                <button>Sign Up</button>
             </Link>
-            <Link to="/login">
-                <button>Login</button>{' '}
+            <Link to="/auth/login">
+                <button>Login</button>
             </Link>
         </nav>
     );
 }
 
-export default navBar;
+export default Navbar;
