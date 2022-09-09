@@ -6,13 +6,15 @@ const AuthContext = React.createContext();
 function AuthProviderWrapper(props) {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoading, setIsLoaded] = useState(true);
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState({});
 
     const storeToken = (token) => {
-        const storeToken = localStorage.getItem('authToken', token);
+        localStorage.setItem('authToken', token);
     };
 
     const authenticateUser = () => {
+        const storeToken = localStorage.getItem('authToken');
+        console.log(storeToken);
         if (storeToken) {
             axios
                 .get(`${API_URL}/auth/verify`, {
@@ -20,6 +22,7 @@ function AuthProviderWrapper(props) {
                 })
                 .then((response) => {
                     const user = response.data;
+                    console.log(user);
                     setIsLoggedIn(true);
                     setIsLoaded(false);
                     setUser(user);
@@ -27,12 +30,12 @@ function AuthProviderWrapper(props) {
                 .catch((err) => {
                     setIsLoaded(false);
                     setIsLoggedIn(false);
-                    setUser(null);
+                    setUser({});
                 });
         } else {
             setIsLoggedIn(false);
             setIsLoaded(false);
-            setUser(null);
+            setUser({});
         }
     };
     const removeToken = () => {
