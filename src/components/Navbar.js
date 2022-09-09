@@ -7,12 +7,11 @@ function Navbar() {
     const { isLoggedIn, user, logOutUser, isLoading } = useContext(AuthContext);
     console.log(user);
 
-
     return (
         <nav>
             {isLoggedIn && (
                 <>
-                    <Link to="/ads/list">
+                    <Link to="/ads">
                         <button>Our Ads</button>
                     </Link>
                     <div>
