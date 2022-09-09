@@ -28,7 +28,7 @@ function LoginPage() {
             .then((response) => {
                 storeToken(response.data.authToken);
                 authenticateUser();
-                navigate('/ads/list');
+                navigate('/ads');
             })
             .catch((err) => {
                 const error = err.response.data.errorMessage;

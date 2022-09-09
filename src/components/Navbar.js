@@ -20,7 +20,7 @@ function Navbar() {
                     <Link to="/">
                         <button>Messages</button>
                     </Link>
-                    <Link to="#">{user.username}</Link>
+                    <Link to={`/user/${user._id}`}>{user.username}</Link>
                     <Link to="#">My Ads</Link>
                     <button onClick={logOutUser}>Logout</button>
                 </>

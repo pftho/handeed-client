@@ -6,7 +6,7 @@ const AuthContext = React.createContext();
 function AuthProviderWrapper(props) {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoading, setIsLoaded] = useState(true);
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState(null);
 
     const storeToken = (token) => {
         localStorage.setItem('authToken', token);
@@ -22,20 +22,19 @@ function AuthProviderWrapper(props) {
                 })
                 .then((response) => {
                     const user = response.data;
-                    console.log(user);
+                    setUser(user);
                     setIsLoggedIn(true);
                     setIsLoaded(false);
-                    setUser(user);
                 })
                 .catch((err) => {
                     setIsLoaded(false);
                     setIsLoggedIn(false);
-                    setUser({});
+                    setUser(null);
                 });
         } else {
             setIsLoggedIn(false);
             setIsLoaded(false);
-            setUser({});
+            setUser(null);
         }
     };
     const removeToken = () => {
