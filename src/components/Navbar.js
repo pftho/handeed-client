@@ -4,8 +4,10 @@ import { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
 
 function Navbar() {
-    const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+    const { isLoggedIn, user, logOutUser, isLoading } = useContext(AuthContext);
     console.log(user);
+
+
     return (
         <nav>
             {isLoggedIn && (
@@ -19,7 +21,7 @@ function Navbar() {
                     <Link to="/">
                         <button>Messages</button>
                     </Link>
-                    {/* <Link to={`/user/${user._id}`}>{user.username}</Link> */}
+                    <Link to="#">{user.username}</Link>
                     <Link to="#">My Ads</Link>
                     <button onClick={logOutUser}>Logout</button>
                 </>
