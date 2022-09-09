@@ -9,10 +9,12 @@ function AuthProviderWrapper(props) {
     const [user, setUser] = useState(null);
 
     const storeToken = (token) => {
-        const storeToken = localStorage.getItem('authToken', token);
+        localStorage.setItem('authToken', token);
     };
 
     const authenticateUser = () => {
+        const storeToken = localStorage.getItem('authToken');
+        console.log(storeToken);
         if (storeToken) {
             axios
                 .get(`${API_URL}/auth/verify`, {
@@ -20,6 +22,7 @@ function AuthProviderWrapper(props) {
                 })
                 .then((response) => {
                     const user = response.data;
+                    console.log(user);
                     setIsLoggedIn(true);
                     setIsLoaded(false);
                     setUser(user);

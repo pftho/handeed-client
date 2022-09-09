@@ -5,12 +5,12 @@ import { AuthContext } from '../context/auth.context';
 
 function Navbar() {
     const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
-
+    console.log(user);
     return (
         <nav>
             {isLoggedIn && (
                 <>
-                    <Link to="/">
+                    <Link to="/ads/list">
                         <button>Our Ads</button>
                     </Link>
                     <div>
@@ -19,17 +19,9 @@ function Navbar() {
                     <Link to="/">
                         <button>Messages</button>
                     </Link>
-                    <div class="dropdown">
-                        <button class="dropbtn">
-                            {user.name}
-                            <i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="dropdown-content">
-                            <Link to="#">Profile</Link>
-                            <Link to="#">My Ads</Link>
-                            <Link to="#">Log out</Link>
-                        </div>
-                    </div>
+                    {/* <Link to={`/user/${user._id}`}>{user.username}</Link> */}
+                    <Link to="#">My Ads</Link>
+                    <button onClick={logOutUser}>Logout</button>
                 </>
             )}
             {!isLoggedIn && (

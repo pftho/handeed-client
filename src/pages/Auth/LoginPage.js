@@ -1,17 +1,19 @@
 import axios from 'axios';
 import React from 'react';
-import { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useState, useContext } from 'react';
+import {  useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/auth.context';
 const API_URL = 'http://localhost:5005';
 
 function LoginPage() {
-    //States
     const [formData, setFormData] = useState({
         email: '',
         password: '',
     });
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
+    const { storeToken, authenticateUser } = useContext(AuthContext);
+
     //handlers
     const handleChange = (e) => {
         const value = e.target.value;
@@ -24,6 +26,8 @@ function LoginPage() {
         axios
             .post(`${API_URL}/auth/login`, formData)
             .then((response) => {
+                storeToken(response.data.authToken);
+                authenticateUser();
                 navigate('/ads/list');
             })
             .catch((err) => {
@@ -44,7 +48,7 @@ function LoginPage() {
                     onChange={handleChange}
                     value={formData.email}
                 />
-                <label >Password</label>
+                <label>Password</label>
                 <input
                     name="password"
                     required
