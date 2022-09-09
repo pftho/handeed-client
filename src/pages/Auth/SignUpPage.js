@@ -43,7 +43,7 @@ function SignUpPage() {
             {' '}
             <h1>Sign Up</h1>
             <form onSubmit={handleSubmit}>
-                <label for="username">User Name</label>
+                <label>User Name</label>
                 <input
                     name="username"
                     required
@@ -51,7 +51,7 @@ function SignUpPage() {
                     onChange={handleChange}
                     value={formData.username}
                 />
-                <label for="email">Email</label>
+                <label>Email</label>
                 <input
                     name="email"
                     type="email"
@@ -59,7 +59,7 @@ function SignUpPage() {
                     onChange={handleChange}
                     value={formData.email}
                 />
-                <label for="password">Password</label>
+                <label>Password</label>
                 <input
                     name="password"
                     required
