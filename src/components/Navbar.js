@@ -26,7 +26,7 @@ function Navbar() {
                         </button>
                         <div class="dropdown-content">
                             <Link to="#">Profile</Link>
-                            <Link to="#">My ads</Link>
+                            <Link to="#">My Ads</Link>
                             <Link to="#">Log out</Link>
                         </div>
                     </div>
