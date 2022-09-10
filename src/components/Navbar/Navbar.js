@@ -16,7 +16,7 @@ function Navbar() {
                         <button>Our Ads</button>
                     </Link>
 
-                    <Link to="/">
+                    <Link to="/message">
                         <button>Messages</button>
                     </Link>
                     <Link to={`/user/${user.id}`}>{user.username}</Link>

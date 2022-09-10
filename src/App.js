@@ -5,6 +5,8 @@ import SignUpPage from './pages/Auth/SignUpPage';
 import LoginPage from './pages/Auth/LoginPage';
 import AdListPage from './pages/AdListPage';
 import ProfilePage from './pages/Profile/ProfilePage';
+import MessagePage from './pages/Message/MessagePage';
+
 function App() {
     return (
         <div className="App">
@@ -14,6 +16,7 @@ function App() {
                 <Route path={'/auth/login'} element={<LoginPage />} />
                 <Route path={'/ads'} element={<AdListPage />} />
                 <Route path={'/user/:userId'} element={<ProfilePage />} />
+                <Route path={'/message'} element={<MessagePage />} />
             </Routes>
         </div>
     );
