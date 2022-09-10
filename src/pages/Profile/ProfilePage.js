@@ -5,48 +5,56 @@ import { AuthContext } from '../../context/auth.context';
 const API_URL = 'http://localhost:5005/api';
 
 function ProfilePage() {
-    const [imageUrl, setImageUrl] = useState(
-        'https://i.stack.imgur.com/34AD2.jpg'
-    );
+    const [localImageUrl, setImageUrl] = useState('');
 
-    const { user } = useContext(AuthContext);
+    const { user, getToken } = useContext(AuthContext);
     if (user === null) {
         return null;
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios
-            .put(`${API_URL}/user/:userId`, { imageUrl })
-            .then((response) => response.status(200).json({ user }));
+        console.log(localImageUrl);
+        axios.put(
+            `${API_URL}/user/${user.id}`,
+            { imageUrl: localImageUrl },
+            {
+                headers: { Authorization: `Bearer ${getToken()}` },
+            }
+        );
     };
 
     const handleFileUpload = (e) => {
         const uploadData = new FormData();
         uploadData.append('imageUrl', e.target.files[0]);
-        // console.log(uploadData.imageUrl);
+
         axios
-            .post(`${API_URL}/upload`, uploadData)
-            .then((response) => {
-                console.log(response);
+            .post(`${API_URL}/upload`, uploadData, {
+                headers: { Authorization: `Bearer ${getToken()}` },
             })
             .then((response) => {
                 console.log(response);
-                setImageUrl(response.fileUrl);
+                setImageUrl(response.data.fileUrl);
             })
             .catch((err) => console.log(err));
     };
+    console.log(user);
 
     return (
         <div>
             <h1>Your profile page</h1>
             <div>
                 <label>Profile picture</label>
-                <img src={imageUrl} alt="profile" width={100} />
+                <img
+                    src={localImageUrl || user.imageUrl}
+                    alt="profile"
+                    width={100}
+                />
                 <form onSubmit={handleSubmit}>
-                    {' '}
                     <input type="file" onChange={handleFileUpload} />
-                    <button>Update</button>
+                    <button type="submit" disabled={!localImageUrl}>
+                        Update
+                    </button>
                 </form>
             </div>
 

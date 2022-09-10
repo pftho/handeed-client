@@ -12,6 +12,10 @@ function AuthProviderWrapper(props) {
         localStorage.setItem('authToken', token);
     };
 
+    const getToken = (token) => {
+        return localStorage.getItem('authToken', token);
+    };
+
     const authenticateUser = () => {
         const storeToken = localStorage.getItem('authToken');
 
@@ -19,6 +23,14 @@ function AuthProviderWrapper(props) {
             axios
                 .get(`${API_URL}/auth/verify`, {
                     headers: { Authorization: `Bearer ${storeToken}` },
+                })
+                .then((response) => {
+                    return axios.get(
+                        `${API_URL}/api/user/${response.data._id}`,
+                        {
+                            headers: { Authorization: `Bearer ${storeToken}` },
+                        }
+                    );
                 })
                 .then((response) => {
                     const user = response.data;
@@ -56,6 +68,7 @@ function AuthProviderWrapper(props) {
                 isLoading,
                 user,
                 storeToken,
+                getToken,
                 authenticateUser,
                 logOutUser,
             }}
