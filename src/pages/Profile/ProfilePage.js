@@ -9,7 +9,6 @@ function ProfilePage() {
         'https://i.stack.imgur.com/34AD2.jpg'
     );
 
-    console.log(imageUrl);
     const { user } = useContext(AuthContext);
     if (user === null) {
         return null;
@@ -17,15 +16,22 @@ function ProfilePage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        handleFileUpload(e);
+        axios
+            .put(`${API_URL}/user/:userId`, { imageUrl })
+            .then((response) => response.status(200).json({ user }));
     };
 
     const handleFileUpload = (e) => {
         const uploadData = new FormData();
         uploadData.append('imageUrl', e.target.files[0]);
+        // console.log(uploadData.imageUrl);
         axios
-            .post('/api/upload', uploadData)
+            .post(`${API_URL}/upload`, uploadData)
             .then((response) => {
+                console.log(response);
+            })
+            .then((response) => {
+                console.log(response);
                 setImageUrl(response.fileUrl);
             })
             .catch((err) => console.log(err));
