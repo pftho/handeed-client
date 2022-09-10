@@ -1,22 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import { AuthContext } from '../context/auth.context';
-
+import { AuthContext } from '../../context/auth.context';
+import Credential from '../Credential/Credential';
+import './Navbar.css';
 function Navbar() {
     const { isLoggedIn, user, logOutUser, isLoading } = useContext(AuthContext);
-    console.log(user);
 
     return (
-        <nav>
+        <nav className="nav">
             {isLoggedIn && (
                 <>
+                    <Credential />
                     <Link to="/ads">
                         <button>Our Ads</button>
                     </Link>
-                    <div>
-                        <p>credit</p>
-                    </div>
+
                     <Link to="/">
                         <button>Messages</button>
                     </Link>
@@ -27,12 +26,14 @@ function Navbar() {
             )}
             {!isLoggedIn && (
                 <>
-                    <Link to="/auth/signup">
-                        <button>Sign Up</button>
-                    </Link>
-                    <Link to="/auth/login">
-                        <button>Login</button>
-                    </Link>
+                    <div>
+                        <Link to="/auth/signup">
+                            <button>Sign Up</button>
+                        </Link>
+                        <Link to="/auth/login">
+                            <button>Login</button>
+                        </Link>{' '}
+                    </div>
                 </>
             )}
         </nav>
