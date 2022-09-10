@@ -6,36 +6,47 @@ const AuthContext = React.createContext();
 function AuthProviderWrapper(props) {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoading, setIsLoaded] = useState(true);
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState(null);
 
     const storeToken = (token) => {
         localStorage.setItem('authToken', token);
     };
 
+    const getToken = (token) => {
+        return localStorage.getItem('authToken', token);
+    };
+
     const authenticateUser = () => {
         const storeToken = localStorage.getItem('authToken');
-        console.log(storeToken);
+
         if (storeToken) {
             axios
                 .get(`${API_URL}/auth/verify`, {
                     headers: { Authorization: `Bearer ${storeToken}` },
                 })
                 .then((response) => {
+                    return axios.get(
+                        `${API_URL}/api/user/${response.data._id}`,
+                        {
+                            headers: { Authorization: `Bearer ${storeToken}` },
+                        }
+                    );
+                })
+                .then((response) => {
                     const user = response.data;
-                    console.log(user);
+                    setUser(user);
                     setIsLoggedIn(true);
                     setIsLoaded(false);
-                    setUser(user);
                 })
                 .catch((err) => {
                     setIsLoaded(false);
                     setIsLoggedIn(false);
-                    setUser({});
+                    setUser(null);
                 });
         } else {
             setIsLoggedIn(false);
             setIsLoaded(false);
-            setUser({});
+            setUser(null);
         }
     };
     const removeToken = () => {
@@ -57,6 +68,7 @@ function AuthProviderWrapper(props) {
                 isLoading,
                 user,
                 storeToken,
+                getToken,
                 authenticateUser,
                 logOutUser,
             }}
