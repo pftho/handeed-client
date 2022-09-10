@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/auth.context';
+import './ProfilePage.css';
 const API_URL = 'http://localhost:5005/api';
 
 function ProfilePage() {
@@ -41,9 +42,9 @@ function ProfilePage() {
     console.log(user);
 
     return (
-        <div>
+        <div className="user-profile">
             <h1>Your profile page</h1>
-            <div>
+            <div className="profile-picture">
                 <label>Profile picture</label>
                 <img
                     src={localImageUrl || user.imageUrl}
@@ -58,21 +59,21 @@ function ProfilePage() {
                 </form>
             </div>
 
-            <div>
+            <div className="user-info">
                 <label>User Name</label>
                 <p>{user.username}</p>
             </div>
 
-            <div>
+            <div className="user-info">
                 <label>Email</label>
                 <p>{user.email}</p>
             </div>
-            <div>
+            <div className="user-info">
                 <label>Home adress</label>
                 <p>{user.address}</p>
             </div>
 
-            <div>
+            <div className="user-info">
                 <label>Reviews</label>
                 <p>{user.reviews}</p>
             </div>
