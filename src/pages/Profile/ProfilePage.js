@@ -1,29 +1,54 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/auth.context';
+const API_URL = 'http://localhost:5005/api';
 
 function ProfilePage() {
+    const [imageUrl, setImageUrl] = useState(
+        'https://i.stack.imgur.com/34AD2.jpg'
+    );
+
+    console.log(imageUrl);
     const { user } = useContext(AuthContext);
     if (user === null) {
         return null;
     }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        handleFileUpload(e);
+    };
+
+    const handleFileUpload = (e) => {
+        const uploadData = new FormData();
+        uploadData.append('imageUrl', e.target.files[0]);
+        axios
+            .post('/api/upload', uploadData)
+            .then((response) => {
+                setImageUrl(response.fileUrl);
+            })
+            .catch((err) => console.log(err));
+    };
+
     return (
         <div>
             <h1>Your profile page</h1>
             <div>
                 <label>Profile picture</label>
-                <img src={user.image} alt="profile picture" />
+                <img src={imageUrl} alt="profile" width={100} />
+                <form onSubmit={handleSubmit}>
+                    {' '}
+                    <input type="file" onChange={handleFileUpload} />
+                    <button>Update</button>
+                </form>
             </div>
+
             <div>
                 <label>User Name</label>
                 <p>{user.username}</p>
             </div>
 
-            <div>
-                <label>Email</label>
-                <p>{user.email}</p>
-            </div>
             <div>
                 <label>Email</label>
                 <p>{user.email}</p>
@@ -37,9 +62,6 @@ function ProfilePage() {
                 <label>Reviews</label>
                 <p>{user.reviews}</p>
             </div>
-            <Link to={`api/user/edit/${user._id}`}>
-                <button>Edit</button>
-            </Link>
         </div>
     );
 }

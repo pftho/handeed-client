@@ -14,7 +14,6 @@ function App() {
                 <Route path={'/auth/login'} element={<LoginPage />} />
                 <Route path={'/ads'} element={<AdListPage />} />
                 <Route path={'/user/:userId'} element={<ProfilePage />} />
-                <Route path={'/user/edit/:userId'} element={<ProfilePage />} />
             </Routes>
         </div>
     );
