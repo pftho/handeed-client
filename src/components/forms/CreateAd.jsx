@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import {  useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import { AuthContext } from '../../context/auth.context';
+import { useContext } from 'react';
 
 function CreateAd() {
     const navigate = useNavigate();
-    
+
+    const {user, getToken} = useContext(AuthContext)
+
     const [image, setImage] = useState("");
     const [newAd, setNewAd] = useState({
         title: '', 
@@ -19,6 +22,9 @@ function CreateAd() {
         image: '',
       })
 
+      if(user  === null) {
+        return null 
+      }
 
       const handleChange = (e) => {
         const value = e.target.value
@@ -31,27 +37,29 @@ function CreateAd() {
       
       const API_URL = "http://localhost:5005";
 
-      const uploadImage = async (file) => {
-        return await axios.post(`${API_URL}/ads/upload`, file)
-          .then(response => response.data)
-          .catch(error => console.log(error));
-      };
+      // const uploadImage = async (file) => {
+      //   return await axios.post(`${API_URL}/ads/upload`, file, {headers: { Authorization: `Bearer ${getToken()}` }})
+      //     .then(response => response.data)
+      //     .catch(error => console.log(error));
+      // };
 
       const handleFileUpload = (e) => {
         const uploadData = new FormData();
         uploadData.append("image", e.target.files[0]);
 
-        uploadImage(uploadData)
+        axios.post(`${API_URL}/ads/upload`, uploadData, {headers: { Authorization: `Bearer ${getToken()}` }})
           .then(response => {
-            setImage(response.fileUrl);
+            console.log(response)
+            setImage(response.data.fileUrl);
           })
           .catch(err => console.log("Error while uploading the file: ", err));
       };
 
-      const handleSubmit = async (e, newAd) => {    
+      const handleSubmit = async (e) => {    
         try {
           e.preventDefault();
-          await axios.post(`${API_URL}/ads`, newAd)
+          console.log(newAd)
+          await axios.post(`${API_URL}/ads`, {...newAd, image}, {headers: { Authorization: `Bearer ${getToken()}` }})
           console.log(newAd)
           navigate("/ads")
         } catch (error) {
@@ -61,7 +69,7 @@ function CreateAd() {
       
     
   return (
-    <form className='new-ad-form' onSubmit={(e) => handleSubmit(e, newAd)}>
+    <form className='new-ad-form' onSubmit={handleSubmit}>
       <label htmlFor='title'>Title</label>
       <input
         type='text'
@@ -130,7 +138,7 @@ function CreateAd() {
         <option value="Broken">Broken</option>
       </select>
 
-      <input type="file" onChange={(e) => handleFileUpload(e)} />
+      <input name='image' type="file" onChange={handleFileUpload} />
       
       <button type="submit">Create</button>
     </form>
