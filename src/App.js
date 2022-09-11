@@ -21,6 +21,7 @@ function App() {
                 <Route path={'/auth/login'} element={<LoginPage />} />
                 <Route path={'/'} element={<LandingPage />} />
                 <Route path={'/user/:userId'} element={<ProfilePage />} />
+                <Route path={'/message'} element={<MessagePage />} />
                 <Route path={'/ads'} element={<AdListPage />} />
                 <Route path={'/ads/create'} element={<CreateAd />} />
                 <Route path={'/ads/:adId'} element={<AdDetailsPage />} />
