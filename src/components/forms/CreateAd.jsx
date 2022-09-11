@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import {  useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../context/auth.context';
@@ -37,12 +37,6 @@ function CreateAd() {
       
       const API_URL = "http://localhost:5005";
 
-      // const uploadImage = async (file) => {
-      //   return await axios.post(`${API_URL}/ads/upload`, file, {headers: { Authorization: `Bearer ${getToken()}` }})
-      //     .then(response => response.data)
-      //     .catch(error => console.log(error));
-      // };
-
       const handleFileUpload = (e) => {
         const uploadData = new FormData();
         uploadData.append("image", e.target.files[0]);
@@ -54,6 +48,7 @@ function CreateAd() {
           })
           .catch(err => console.log("Error while uploading the file: ", err));
       };
+
 
       const handleSubmit = async (e) => {    
         try {
@@ -77,7 +72,6 @@ function CreateAd() {
         value={newAd.title}
         onChange={handleChange}
       />
-
 
       <label htmlFor='description'>Description</label>
       <textarea
@@ -139,7 +133,7 @@ function CreateAd() {
       </select>
 
       <input name='image' type="file" onChange={handleFileUpload} />
-      
+
       <button type="submit">Create</button>
     </form>
   )

@@ -16,7 +16,10 @@ function AdDetails({
 }) {
     let map;
     if (user !== undefined) {
-        const latlng = [user.location.coordinates[1], user.location.coordinates[0]];
+        const latlng = [
+            user.location.coordinates[1],
+            user.location.coordinates[0],
+        ];
         map = (
             <MapContainer
                 center={latlng}
