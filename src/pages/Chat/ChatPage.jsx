@@ -1,11 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
-import io from 'socket.io-client';
+import io from 'socket.io-client'; // function from the library
+const socket = io.connect('http://localhost:5006'); //we will use this to emmit and listen to events
+
+//Explanation: when we send data, we can only send it  to the backend.
+// But that we want to send it to another user, so the backend will be used as a layer for this
+// Font send to back -> back send back to front
 
 function ChatPage() {
     const [state, setState] = useState({ message: '', username: '' });
-    const [chat, setChat] = useState([]); // array of multiple objects of messages and usernames
-
-    const socketRef = useRef();
+    const [chat, setChat] = useState([]); // array of multiple objects of messages and usernames - used for display
+    const [room, setRoom] = useState('');
+    
+    const joinRoom = () => {
+        if (room !== '') {
+            socket.emit('join_room', room);
+        }
+    };
 
     const onTextChange = (e) => {
         setState({ ...state, [e.target.name]: e.target.value });
@@ -14,17 +24,18 @@ function ChatPage() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const { username, message } = state;
-        socketRef.current.emit('message', { username, message });
+        socket.emit('send_message_to_backend', { username, message }); // sending to the backend the information
         setState({ message: '', username });
     };
 
+    //we use useEffect to be called everytime we recieve we recive a message
+    // We are saying that we listen for an even like in the backend
     useEffect(() => {
-        socketRef.current = io.connect('http://localhost:5006');
-        socketRef.current.on('message', ({ username, message }) => {
+        socket.on('recieve_message_from_back', ({ username, message }) => {
             setChat([...chat, { username, message }]);
         });
-        return () => socketRef.current.disconnect();
-    }, [chat]);
+        return () => socket.current.disconnect();
+    }, [socket]); //when ever we have an event, we listen again
 
     return (
         <div>
@@ -48,15 +59,17 @@ function ChatPage() {
                             value={state.message}
                         />
                     </div>
-                    <button type="submit">Send</button>
+                    <button>Send</button>
                 </form>
                 <div className="chatRender">
                     <h1>Messages Log</h1>
-                    {chat.map(({ name, message }, index) => {
+
+                    {chat.map(({ username, message }, index) => {
+                        console.log(username);
                         return (
                             <div key={index}>
                                 <h3>
-                                    {name}: <span>{message}</span>
+                                    {username}: <span>{message}</span>
                                 </h3>
                             </div>
                         );
