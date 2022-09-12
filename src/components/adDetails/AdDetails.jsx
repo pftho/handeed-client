@@ -54,6 +54,9 @@ function AdDetails({
             <Link to={`/ads/${_id}/edit`}>
                 <button>Edit this ad</button>
             </Link>
+            <Link to={`/ads/${_id}/message`}>
+                <button>Contact</button>
+            </Link>
             {map}
         </div>
     );
