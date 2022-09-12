@@ -16,31 +16,31 @@ function AdDetails({
     handleDelete
 }) {
 
-    // let map;
-    // if (owner !== undefined) {
-    //     const latlng = [
-    //         owner.location.coordinates[1],
-    //         owner.location.coordinates[0],
-    //     ];
-    //     map = (
-    //         <MapContainer
-    //             center={latlng}
-    //             zoom={13}
-    //             scrollWheelZoom={false}
-    //             style={{ height: '500px', width: '1000px' }}
-    //         >
-    //             <TileLayer
-    //                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    //                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-    //             />
-    //             <Marker position={latlng}>
-    //                 <Popup>
-    //                     A pretty CSS3 popup. <br /> Easily customizable.
-    //                 </Popup>
-    //             </Marker>
-    //         </MapContainer>
-    //     );
-    // }
+    let map;
+    if (owner !== undefined) {
+        const latlng = [
+            owner.location.coordinates[1],
+            owner.location.coordinates[0],
+        ];
+        map = (
+            <MapContainer
+                center={latlng}
+                zoom={13}
+                scrollWheelZoom={false}
+                style={{ height: '500px', width: '1000px' }}
+            >
+                <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <Marker position={latlng}>
+                    <Popup>
+                        A pretty CSS3 popup. <br /> Easily customizable.
+                    </Popup>
+                </Marker>
+            </MapContainer>
+        );
+    }
 
     return (
         <div className="ad-details">
@@ -58,7 +58,7 @@ function AdDetails({
             </Link>
             <button onClick={handleDelete}><i class="fa-solid fa-trash"></i></button> 
 
-            {/* {map} */}
+            {map}
         </div>
     );
 }
