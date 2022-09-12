@@ -1,5 +1,5 @@
 import React from 'react'
-import AdList from '../components/adList/AdList'
+import AdList from '../../components/adList/AdList'
 
 function AdListPage() {
   return (

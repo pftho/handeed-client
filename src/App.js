@@ -5,11 +5,12 @@ import SignUpPage from './pages/Auth/SignUpPage';
 import LoginPage from './pages/Auth/LoginPage';
 import ProfilePage from './pages/Profile/ProfilePage';
 import LandingPage from './pages/LandingPage';
-import AdDetailsPage from './pages/AdDetailsPage';
+import AdDetailsPage from './pages/Ads/AdDetailsPage';
 import CreateAd from './components/forms/CreateAd';
-import AdListPage from './pages/AdListPage';
+import AdListPage from './pages/Ads/AdListPage';
 import IsAnon from './components/IsAnon';
 import IsPrivate from './components/IsPrivate';
+import UpdateAd from './components/forms/UpdateAd';
 
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
                 <Route path={'/ads'} element={<AdListPage />} />
                 <Route path={'/ads/create'} element={<CreateAd />} />
                 <Route path={'/ads/:adId'} element={<AdDetailsPage />} />
-                <Route path={'/ads/:adId/edit'} element={<AdDetailsPage />} />
+                <Route path={'/ads/:adId/edit'} element={<UpdateAd />} />
                 {/* <Route path={'/auth/signup'} element={<IsAnon><SignUpPage/></IsAnon>} />
                 <Route path={'/auth/login'} element={<IsAnon><LoginPage/></IsAnon>} />
                 <Route path={'/'} element={<IsAnon><LandingPage /></IsAnon>} />
