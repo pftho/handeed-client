@@ -12,13 +12,15 @@ function AdDetails({
     category,
     condition,
     city,
-    user,
+    owner,
+    handleDelete
 }) {
+
     let map;
-    if (user !== undefined) {
+    if (owner !== undefined) {
         const latlng = [
-            user.location.coordinates[1],
-            user.location.coordinates[0],
+            owner.location.coordinates[1],
+            owner.location.coordinates[0],
         ];
         map = (
             <MapContainer
@@ -54,6 +56,8 @@ function AdDetails({
             <Link to={`/ads/${_id}/edit`}>
                 <button>Edit this ad</button>
             </Link>
+            <button onClick={handleDelete}><i class="fa-solid fa-trash"></i></button> 
+
             {map}
         </div>
     );

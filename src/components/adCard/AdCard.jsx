@@ -1,8 +1,8 @@
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 function AdCard({ _id, image, title, brand, size }) {
     return (
-        <div className="ProjectCard card">
+        <div className="ad-card">
             <Link to={`/ads/${_id}`}>
                 <img src={image} alt="" />
                 <h3>{title}</h3>

@@ -10,6 +10,7 @@ function CreateAd() {
     const {user, getToken} = useContext(AuthContext)
 
     const [image, setImage] = useState("");
+    //const [owner, setOwner] = useState('')
     const [newAd, setNewAd] = useState({
         title: '', 
         description: '', 
@@ -20,6 +21,7 @@ function CreateAd() {
         status: 'Available', 
         city: 'Paris',
         image: '',
+        owner: user.id
       })
 
       if(user  === null) {
@@ -53,7 +55,8 @@ function CreateAd() {
       const handleSubmit = async (e) => {    
         try {
           e.preventDefault();
-          console.log(newAd)
+          console.log(user)
+          //setOwner(user)
           await axios.post(`${API_URL}/ads`, {...newAd, image}, {headers: { Authorization: `Bearer ${getToken()}` }})
           console.log(newAd)
           navigate("/ads")
@@ -131,6 +134,8 @@ function CreateAd() {
         <option value="Worn">Worn</option>
         <option value="Broken">Broken</option>
       </select>
+
+      <input name='owner' type='text' value={newAd.owner} readOnly hidden/>
 
       <input name='image' type="file" onChange={handleFileUpload} />
 
