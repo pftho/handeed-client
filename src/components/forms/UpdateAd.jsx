@@ -16,7 +16,7 @@ function UpdateAd() {
         condition: '',
         status: 'Available',
         owner: user,
-        city: 'Paris',
+        city: '',
         image: '',
     });
 
@@ -28,8 +28,8 @@ function UpdateAd() {
         const response = await axios.get(`${API_URL}/ads/${adId}`, {
             headers: { Authorization: `Bearer ${getToken()}` },
         });
-        console.log(response.data);
         setAdToUpdate(response.data);
+        setImage(response.data.image)
     };
 
     useEffect(() => {
