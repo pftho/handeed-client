@@ -10,21 +10,22 @@ import CreateAd from './components/forms/CreateAd';
 import AdListPage from './pages/AdListPage';
 import IsAnon from './components/IsAnon';
 import IsPrivate from './components/IsPrivate';
-
+import ChatPage from './pages/Chat/ChatPage';
 
 function App() {
     return (
         <div className="App">
             <Navbar />
             <Routes>
-            <Route path={'/auth/signup'} element={<SignUpPage/>} />
-                <Route path={'/auth/login'} element={<LoginPage/>} />
+                <Route path={'/auth/signup'} element={<SignUpPage />} />
+                <Route path={'/auth/login'} element={<LoginPage />} />
                 <Route path={'/'} element={<LandingPage />} />
                 <Route path={'/user/:userId'} element={<ProfilePage />} />
                 <Route path={'/ads'} element={<AdListPage />} />
                 <Route path={'/ads/create'} element={<CreateAd />} />
                 <Route path={'/ads/:adId'} element={<AdDetailsPage />} />
                 <Route path={'/ads/:adId/edit'} element={<AdDetailsPage />} />
+                <Route path={'/message'} element={<ChatPage />} />
                 {/* <Route path={'/auth/signup'} element={<IsAnon><SignUpPage/></IsAnon>} />
                 <Route path={'/auth/login'} element={<IsAnon><LoginPage/></IsAnon>} />
                 <Route path={'/'} element={<IsAnon><LandingPage /></IsAnon>} />
