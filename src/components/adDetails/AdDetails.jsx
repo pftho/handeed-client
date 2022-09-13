@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
+import Chat from '../Chat/Chat';
+import io from 'socket.io-client';
+const socket = io.connect('http://localhost:5006'); //we will use this to emmit and listen to events
 
 function AdDetails({
     _id,
@@ -61,6 +64,11 @@ function AdDetails({
             </button>
 
             {map}
+
+            <Link to={`/ads/${_id}/message`}>
+                <button onClick={joinRoom}>Chat with owner</button>
+            </Link>
+            <Chat socket={socket} room={room} />
         </div>
     );
 }
