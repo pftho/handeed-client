@@ -11,6 +11,7 @@ const socket = io.connect('http://localhost:5006'); //we will use this to emmit 
 >>>>>>> edd0146 (wip)
 
 function Chat({ socket, username, room }) {
+<<<<<<< HEAD
     const [state, setState] = useState({ message: '', username: '' });
     const [chat, setChat] = useState([]); // array of multiple objects of messages and usernames - used for display
 <<<<<<< HEAD
@@ -32,16 +33,30 @@ function Chat({ socket, username, room }) {
     };
 >>>>>>>> edd0146 (wip):src/pages/Chat/ChatPage.jsx
 >>>>>>> edd0146 (wip)
+=======
+    const [currentMessage, setCurrentMessage] = useState('');
+    const [chat, setChat] = useState([]);
+>>>>>>> 368784b (wip)
 
     const onTextChange = (e) => {
-        setState({ ...state, [e.target.name]: e.target.value });
+        setCurrentMessage(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const { username, message } = state;
-        socket.emit('send_message', { username, message }); // sending to the backend the information
-        setState({ message: '', username });
+        if (currentMessage !== '') {
+            const messageData = {
+                room: room,
+                author: username,
+                message: currentMessage,
+                time:
+                    new Date(Date.now()).getHours() +
+                    ':' +
+                    new Date(Date.now()).getMinutes(),
+            };
+            await socket.emit('send_message', messageData); // sending to the backend the information
+            setCurrentMessage('');
+        }
     };
 
 <<<<<<< HEAD
@@ -69,9 +84,10 @@ function Chat({ socket, username, room }) {
 
     return (
         <div>
-            <h1> Chat with Handeer </h1>
-            <div className="messageCard">
+            <div className="chat">
+                <h1> Contact owner </h1>
                 <form onSubmit={handleSubmit}>
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<<< HEAD:src/components/Chat/Chat.js
@@ -87,18 +103,21 @@ function Chat({ socket, username, room }) {
                             value={state.username}
                         />
                     </div>
+=======
+>>>>>>> 368784b (wip)
                     <div>
                         <input
                             type="text"
                             name="message"
+                            placeholder="Hello..."
                             onChange={(e) => onTextChange(e)}
-                            value={state.message}
+                            value={currentMessage.message}
                         />
                     </div>
-                    <button>Send</button>
+                    <button>&#9658;</button>
                 </form>
                 <div className="chatRender">
-                    <h1>Messages Log</h1>
+                    <h1>Live Chat</h1>
                     <div>
                         {' '}
                         {chat.map(({ username, message }, index) => {
