@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useReducer, useState } from 'react';
+import { AuthContext } from '../../context/auth.context';
 import './Credits.css';
 
 function Credits() {
     const [hangerNumber, setHangerNumber] = useState(3);
-
+    const { user } = useContext(AuthContext);
     return (
         <div className="credits">
             <img src={require('./hanger.png')} alt="hanger" width={30} />
-            <p>{hangerNumber}</p>
+            <p>{user.credits}</p>
         </div>
     );
 }

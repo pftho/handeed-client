@@ -45,13 +45,14 @@ function AdDetails({
         );
     }
 
-    const { user, getToken } = useContext(AuthContext);
+    const { user, setUser, getToken } = useContext(AuthContext);
     const [isChatVisible, setIsChatVisible] = React.useState(false);
     const handleCredit = async () => {
         if (user.credits < 1) {
             window.alert(
                 'You are out of hangers, make a donation to earn more'
             );
+            return;
         }
         const answer = window.confirm('Use 1 credit to contact this Hander');
 
@@ -64,6 +65,7 @@ function AdDetails({
                 }
             );
             setIsChatVisible(true);
+            setUser({ ...user, credits: user.credits - 1 });
         }
     };
 
