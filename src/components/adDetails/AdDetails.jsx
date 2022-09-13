@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
+import Chat from '../Chat/Chat';
+import { AuthContext } from '../../context/auth.context';
+import { useContext } from 'react';
 
 function AdDetails({
     _id,
@@ -13,9 +16,8 @@ function AdDetails({
     condition,
     city,
     owner,
-    handleDelete
+    handleDelete,
 }) {
-
     let map;
     if (owner !== undefined) {
         const latlng = [
@@ -42,6 +44,9 @@ function AdDetails({
         );
     }
 
+    const { user } = useContext(AuthContext);
+    // const handleCredit = () => {};
+
     return (
         <div className="ad-details">
             <img src={image} alt="" />
@@ -56,9 +61,15 @@ function AdDetails({
             <Link to={`/ads/${_id}/edit`}>
                 <button>Edit this ad</button>
             </Link>
-            <button onClick={handleDelete}><i class="fa-solid fa-trash"></i></button> 
+            <button onClick={handleDelete}>
+                <i className="fa-solid fa-trash"></i>
+            </button>
 
             {map}
+
+            {/* <button onClick={handleCredit}>Chat with owner</button> */}
+
+            {user ? <Chat room={_id} username={user.username} /> : null}
         </div>
     );
 }
