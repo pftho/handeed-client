@@ -44,6 +44,12 @@ function AdDetails({
             </MapContainer>
         );
     }
+    const room = _id;
+    const joinRoom = () => {
+        if (room !== '') {
+            socket.emit('join_room', room);
+        }
+    };
 
     const room = _id;
     const joinRoom = () => {
@@ -64,11 +70,14 @@ function AdDetails({
             <Link to={`/ads/${_id}/edit`}>
                 <button>Edit this ad</button>
             </Link>
+<<<<<<< HEAD
             <button onClick={handleDelete}>
                 <i class="fa-solid fa-trash"></i>
             </button>
 
             {map}
+=======
+>>>>>>> edd0146 (wip)
 
             <Link to={`/ads/${_id}/message`}>
                 <button onClick={joinRoom}>Chat with owner</button>
