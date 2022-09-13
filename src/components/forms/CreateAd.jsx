@@ -10,7 +10,6 @@ function CreateAd() {
     const { user, getToken } = useContext(AuthContext);
 
     const [image, setImage] = useState("");
-    //const [owner, setOwner] = useState('')
     const [newAd, setNewAd] = useState({
         title: '',
         description: '',
@@ -59,10 +58,8 @@ function CreateAd() {
     const handleSubmit = async (e) => {
         try {
           e.preventDefault();
-          console.log(user)
-          //setOwner(user)
-          await axios.post(`${API_URL}/ads`, {...newAd, image}, {headers: { Authorization: `Bearer ${getToken()}` }})
-          console.log(newAd)
+          const response = await axios.post(`${API_URL}/ads`, {...newAd, image}, {headers: { Authorization: `Bearer ${getToken()}` }})
+          user.ads.push(response.data._id)
           navigate("/ads")
         } catch (error) {
             console.log(error);

@@ -1,9 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
 import Chat from '../Chat/Chat';
 import { AuthContext } from '../../context/auth.context';
-import { useContext } from 'react';
 
 function AdDetails({
     _id,
@@ -18,6 +17,12 @@ function AdDetails({
     owner,
     handleDelete,
 }) {
+
+    const { isOwner, checkIfOwner } = useContext(AuthContext);
+    const {adId} = useParams()
+
+    checkIfOwner(adId)
+  
     let map;
     if (owner !== undefined) {
         const latlng = [
@@ -58,12 +63,16 @@ function AdDetails({
             <p>{condition}</p>
             <p>{city}</p>
 
-            <Link to={`/ads/${_id}/edit`}>
-                <button>Edit this ad</button>
-            </Link>
-            <button onClick={handleDelete}>
-                <i className="fa-solid fa-trash"></i>
-            </button>
+            {isOwner && (
+                <>
+                    <Link to={`/ads/${_id}/edit`}>
+                        <button>Edit this ad</button>
+                    </Link>
+                    <button onClick={handleDelete}>
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </>
+            )}
 
             {map}
 
