@@ -46,7 +46,9 @@ function AdDetails({
 
     const room = _id;
     const joinRoom = () => {
-        socket.emit('join_room', room);
+        if (room !== '') {
+            socket.emit('join_room', room);
+        }
     };
 
     return (
