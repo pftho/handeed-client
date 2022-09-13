@@ -25,7 +25,7 @@ function App() {
                 <Route path={'/ads/create'} element={<CreateAd />} />
                 <Route path={'/ads/:adId'} element={<AdDetailsPage />} />
                 <Route path={'/ads/:adId/edit'} element={<UpdateAd />} />
-                <Route path={'/ads/:adId/message'} />
+
                 {/* <Route path={'/auth/signup'} element={<IsAnon><SignUpPage/></IsAnon>} />
                 <Route path={'/auth/login'} element={<IsAnon><LoginPage/></IsAnon>} />
                 <Route path={'/'} element={<IsAnon><LandingPage /></IsAnon>} />

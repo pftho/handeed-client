@@ -1,15 +1,31 @@
 import React, { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import io from 'socket.io-client';
 
-function Chat({ socket, username, room }) {
+const socket = io.connect('http://localhost:5006');
+
+function Chat({ username, room }) {
     const [currentMessage, setCurrentMessage] = useState('');
-    const [chat, setChat] = useState([]);
+    const [chat, setChat] = useState([]); // array to contain all messages
 
+    //get the content of the message
     const onTextChange = (e) => {
         setCurrentMessage(e.target.value);
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    useEffect(() => {
+        socket.emit('join_room', room);
+        socket.on('receive_message', (data) => {
+            console.log(data);
+            setChat((chat) => [...chat, data]);
+        });
+        return () => {
+            socket.off('receive_message');
+        };
+    }, []);
+
+    //submit the message and add it to other messages in the chat
+    const handleSubmit = async () => {
         if (currentMessage !== '') {
             const messageData = {
                 room: room,
@@ -20,42 +36,36 @@ function Chat({ socket, username, room }) {
                     ':' +
                     new Date(Date.now()).getMinutes(),
             };
-            await socket.emit('send_message', messageData); // sending to the backend the information
+            //waiting for the message content and meta and sending it to the backend
+            await socket.emit('send_message', messageData);
             setChat((chat) => [...chat, messageData]);
             setCurrentMessage('');
         }
     };
 
-    useEffect(() => {
-        socket.on('receive_message', (data) => {
-            setChat((chat) => [...chat, data]);
-        });
-    }, [socket]); //when ever we have an event, we listen again
-
     return (
         <div>
             <div className="chat">
                 <h1> Contact owner </h1>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <input
-                            type="text"
-                            name="message"
-                            placeholder="Hello..."
-                            onChange={(e) => onTextChange(e)}
-                            value={currentMessage.message}
-                        />
-                    </div>
-                    <button>&#9658;</button>
-                </form>
+
+                <div>
+                    <input
+                        type="text"
+                        name="message"
+                        placeholder="Hello..."
+                        onChange={(e) => onTextChange(e)}
+                        value={currentMessage.message}
+                    />
+                </div>
+                <button onClick={handleSubmit}>&#9658;</button>
+
                 <div className="chatRender">
-                    <h1>Live Chat</h1>
-                    <div>
-                        {' '}
+                    <div className="message-container">
+                        <h1>Live Chat</h1>{' '}
                         {chat.map((message) => {
                             return (
-                                <div>
-                                    <div className="message-content">
+                                <div key={uuidv4()} className="message-content">
+                                    <div>
                                         <p>{message.message}</p>
                                     </div>
                                     <div className="message-info">

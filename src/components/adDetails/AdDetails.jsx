@@ -2,11 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
 import Chat from '../Chat/Chat';
-import io from 'socket.io-client';
 import { AuthContext } from '../../context/auth.context';
 import { useContext } from 'react';
-
-const socket = io.connect('http://localhost:5006'); //we will use this to emmit and listen to events
 
 function AdDetails({
     _id,
@@ -21,7 +18,6 @@ function AdDetails({
     owner,
     handleDelete,
 }) {
-
     let map;
     if (owner !== undefined) {
         const latlng = [
@@ -48,14 +44,7 @@ function AdDetails({
         );
     }
 
-const { user } = useContext(AuthContext);
-    const room = _id;
-    const joinRoom = () => {
-        if (room !== '') {
-            socket.emit('join_room', room);
-        }
-    };
-
+    const { user } = useContext(AuthContext);
 
     return (
         <div className="ad-details">
@@ -72,15 +61,14 @@ const { user } = useContext(AuthContext);
                 <button>Edit this ad</button>
             </Link>
             <button onClick={handleDelete}>
-                <i class="fa-solid fa-trash"></i>
+                <i className="fa-solid fa-trash"></i>
             </button>
 
             {map}
 
-            <Link to={`/ads/${_id}/message`}>
-                <button onClick={joinRoom}>Chat with owner</button>
-            </Link>
-            <Chat socket={socket} room={room} username={user.username} />
+            {/* <button onClick={joinRoom}>Chat with owner</button> */}
+
+            {user ? <Chat room={_id} username={user.username} /> : null}
         </div>
     );
 }
