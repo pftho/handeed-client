@@ -1,5 +1,5 @@
-import React, {  useState } from 'react';
-import {  useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../context/auth.context';
 import { useContext } from 'react';
@@ -7,52 +7,56 @@ import { useContext } from 'react';
 function CreateAd() {
     const navigate = useNavigate();
 
-    const {user, getToken} = useContext(AuthContext)
+    const { user, getToken } = useContext(AuthContext);
 
     const [image, setImage] = useState("");
     //const [owner, setOwner] = useState('')
     const [newAd, setNewAd] = useState({
-        title: '', 
-        description: '', 
-        brand: '', 
-        size: '', 
-        category: '', 
-        condition: '', 
-        status: 'Available', 
+        title: '',
+        description: '',
+        brand: '',
+        size: '',
+        category: '',
+        condition: '',
+        status: 'Available',
         city: 'Paris',
         image: '',
         owner: user.id
       })
 
-      if(user  === null) {
-        return null 
-      }
+    if (user === null) {
+        return null;
+    }
 
-      const handleChange = (e) => {
-        const value = e.target.value
-        const name = e.target.name
+    const handleChange = (e) => {
+        const value = e.target.value;
+        const name = e.target.name;
         setNewAd({
-          ...newAd,
-          [name]: value
-        })
-      }
-      
-      const API_URL = "http://localhost:5005";
+            ...newAd,
+            [name]: value,
+        });
+    };
 
-      const handleFileUpload = (e) => {
+    const API_URL = 'http://localhost:5005';
+
+    const handleFileUpload = (e) => {
         const uploadData = new FormData();
-        uploadData.append("image", e.target.files[0]);
+        uploadData.append('image', e.target.files[0]);
 
-        axios.post(`${API_URL}/ads/upload`, uploadData, {headers: { Authorization: `Bearer ${getToken()}` }})
-          .then(response => {
-            console.log(response)
-            setImage(response.data.fileUrl);
-          })
-          .catch(err => console.log("Error while uploading the file: ", err));
-      };
+        axios
+            .post(`${API_URL}/ads/upload`, uploadData, {
+                headers: { Authorization: `Bearer ${getToken()}` },
+            })
+            .then((response) => {
+                console.log(response);
+                setImage(response.data.fileUrl);
+            })
+            .catch((err) =>
+                console.log('Error while uploading the file: ', err)
+            );
+    };
 
-
-      const handleSubmit = async (e) => {    
+    const handleSubmit = async (e) => {
         try {
           e.preventDefault();
           console.log(user)
@@ -61,7 +65,7 @@ function CreateAd() {
           console.log(newAd)
           navigate("/ads")
         } catch (error) {
-          console.log(error)
+            console.log(error);
         }
       };
       
@@ -144,4 +148,4 @@ function CreateAd() {
   )
 }
 
-export default CreateAd
+export default CreateAd;
