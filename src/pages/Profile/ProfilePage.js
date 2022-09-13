@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/auth.context';
 import './ProfilePage.css';
-const API_URL = 'http://localhost:5005/api';
+const API_URL = 'http://localhost:5005';
 
 function ProfilePage() {
     const [localImageUrl, setImageUrl] = useState('');
@@ -17,7 +17,7 @@ function ProfilePage() {
         e.preventDefault();
         console.log(localImageUrl);
         axios.put(
-            `${API_URL}/user/${user.id}`,
+            `${API_URL}/api/user/${user.id}`,
             { imageUrl: localImageUrl },
             {
                 headers: { Authorization: `Bearer ${getToken()}` },
@@ -30,7 +30,7 @@ function ProfilePage() {
         uploadData.append('imageUrl', e.target.files[0]);
 
         axios
-            .post(`${API_URL}/upload`, uploadData, {
+            .post(`${API_URL}/api/upload`, uploadData, {
                 headers: { Authorization: `Bearer ${getToken()}` },
             })
             .then((response) => {

@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import './Credential.css';
+import './Credits.css';
 
-function Credential() {
+function Credits() {
     const [hangerNumber, setHangerNumber] = useState(3);
 
     return (
-        <div className="credential">
+        <div className="credits">
             <img src={require('./hanger.png')} alt="hanger" width={30} />
             <p>{hangerNumber}</p>
         </div>
     );
 }
 
-export default Credential;
+export default Credits;
