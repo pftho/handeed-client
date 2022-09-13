@@ -6,9 +6,8 @@ const socket = io.connect('http://localhost:5006');
 
 function Chat({ username, room }) {
     const [currentMessage, setCurrentMessage] = useState('');
-    const [chat, setChat] = useState([]); // array to contain all messages
+    const [chat, setChat] = useState([]);
 
-    //get the content of the message
     const onTextChange = (e) => {
         setCurrentMessage(e.target.value);
     };
@@ -21,10 +20,10 @@ function Chat({ username, room }) {
         });
         return () => {
             socket.off('receive_message');
+            socket.off('disconnect');
         };
     }, []);
 
-    //submit the message and add it to other messages in the chat
     const handleSubmit = async () => {
         if (currentMessage !== '') {
             const messageData = {
@@ -36,7 +35,7 @@ function Chat({ username, room }) {
                     ':' +
                     new Date(Date.now()).getMinutes(),
             };
-            //waiting for the message content and meta and sending it to the backend
+
             await socket.emit('send_message', messageData);
             setChat((chat) => [...chat, messageData]);
             setCurrentMessage('');
@@ -54,7 +53,9 @@ function Chat({ username, room }) {
                         name="message"
                         placeholder="Hello..."
                         onChange={(e) => onTextChange(e)}
-                        value={currentMessage.message}
+                        onKeyPress={(e) => {
+                            e.key === 'Enter' && handleSubmit();
+                        }}
                     />
                 </div>
                 <button onClick={handleSubmit}>&#9658;</button>

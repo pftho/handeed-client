@@ -45,6 +45,7 @@ function AdDetails({
     }
 
     const { user } = useContext(AuthContext);
+    // const handleCredit = () => {};
 
     return (
         <div className="ad-details">
@@ -66,7 +67,7 @@ function AdDetails({
 
             {map}
 
-            {/* <button onClick={joinRoom}>Chat with owner</button> */}
+            {/* <button onClick={handleCredit}>Chat with owner</button> */}
 
             {user ? <Chat room={_id} username={user.username} /> : null}
         </div>
