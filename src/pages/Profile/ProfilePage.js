@@ -98,17 +98,23 @@ function ProfilePage() {
             <div className="user-info">
                 <label>My ads</label>
                 <ul>
-                    {user.ads.map((ad) => {
-                        return (
-                            <li>
-                                {' '}
-                                {ad.title}{' '}
-                                <button onClick={() => handleCredit(ad._id)}>
-                                    Confirm donation
-                                </button>
-                            </li>
-                        );
-                    })}{' '}
+                    {user.ads.length ? (
+                        user.ads.map((ad) => {
+                            return (
+                                <li>
+                                    {' '}
+                                    {ad.title}{' '}
+                                    <button
+                                        onClick={() => handleCredit(ad._id)}
+                                    >
+                                        Confirm donation
+                                    </button>
+                                </li>
+                            );
+                        })
+                    ) : (
+                        <p>You don't have any ads yet</p>
+                    )}
                 </ul>
             </div>
         </div>
