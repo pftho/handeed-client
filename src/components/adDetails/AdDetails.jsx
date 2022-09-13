@@ -44,6 +44,11 @@ function AdDetails({
     //     );
     // }
 
+    const room = _id;
+    const joinRoom = () => {
+        socket.emit('join_room', room);
+    };
+
     return (
         <div className="ad-details">
             <img src={image} alt="" />

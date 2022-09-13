@@ -11,7 +11,6 @@ import AdListPage from './pages/Ads/AdListPage';
 import IsAnon from './components/IsAnon';
 import IsPrivate from './components/IsPrivate';
 import UpdateAd from './components/forms/UpdateAd';
-import ChatPage from './pages/Chat/ChatPage';
 
 function App() {
     return (
