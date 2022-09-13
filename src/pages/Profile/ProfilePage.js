@@ -8,7 +8,7 @@ const API_URL = 'http://localhost:5005';
 function ProfilePage() {
     const [localImageUrl, setImageUrl] = useState('');
 
-    const { user, getToken } = useContext(AuthContext);
+    const { user, getToken, setUser } = useContext(AuthContext);
     if (user === null) {
         return null;
     }
@@ -40,6 +40,28 @@ function ProfilePage() {
             .catch((err) => console.log(err));
     };
     console.log(user);
+
+    const handleCredit = async (_id) => {
+        await axios.delete(`${API_URL}/ads/${_id}`, {
+            headers: { Authorization: `Bearer ${getToken()}` },
+        });
+
+        await axios.put(
+            `${API_URL}/api/user/${user.id}`,
+            { credits: user.credits + 1 },
+            {
+                headers: { Authorization: `Bearer ${getToken()}` },
+            }
+        );
+
+        const updatedUser = await axios.get(`${API_URL}/api/user/${user.id}`, {
+            headers: { Authorization: `Bearer ${getToken()}` },
+        });
+
+        setUser(updatedUser.data);
+    };
+
+    console.log(user.ads);
 
     return (
         <div className="user-profile">
@@ -74,8 +96,20 @@ function ProfilePage() {
             </div>
 
             <div className="user-info">
-                <label>Reviews</label>
-                <p>{user.reviews}</p>
+                <label>My ads</label>
+                <ul>
+                    {user.ads.map((ad) => {
+                        return (
+                            <li>
+                                {' '}
+                                {ad.title}{' '}
+                                <button onClick={() => handleCredit(ad._id)}>
+                                    Confirm donation
+                                </button>
+                            </li>
+                        );
+                    })}{' '}
+                </ul>
             </div>
         </div>
     );

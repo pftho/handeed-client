@@ -3,7 +3,6 @@ import { AuthContext } from '../../context/auth.context';
 import './Credits.css';
 
 function Credits() {
-    const [hangerNumber, setHangerNumber] = useState(3);
     const { user } = useContext(AuthContext);
     return (
         <div className="credits">

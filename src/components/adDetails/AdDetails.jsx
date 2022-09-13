@@ -4,7 +4,7 @@ import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
 import Chat from '../Chat/Chat';
 import { AuthContext } from '../../context/auth.context';
 import axios from 'axios';
-const API_URL = 'http://localhost:5005/api';
+const API_URL = 'http://localhost:5005';
 
 function AdDetails({
     _id,
@@ -58,7 +58,7 @@ function AdDetails({
 
         if (answer) {
             await axios.put(
-                `${API_URL}/user/${user.id}`,
+                `${API_URL}/api/user/${user.id}`,
                 { credits: user.credits - 1 },
                 {
                     headers: { Authorization: `Bearer ${getToken()}` },
