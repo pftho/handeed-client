@@ -21,16 +21,15 @@ function Chat({ socket, username, room }) {
                     new Date(Date.now()).getMinutes(),
             };
             await socket.emit('send_message', messageData); // sending to the backend the information
+            setChat((chat) => [...chat, messageData]);
             setCurrentMessage('');
         }
     };
 
     useEffect(() => {
-        socket.on('receive_message', ({ username, message }) => {
-            alert(`${username} ${message}`);
-            console.log('2', username, message);
+        socket.on('receive_message', (data) => {
+            setChat((chat) => [...chat, data]);
         });
-        return () => socket.current.disconnect();
     }, [socket]); //when ever we have an event, we listen again
 
     return (
@@ -53,12 +52,16 @@ function Chat({ socket, username, room }) {
                     <h1>Live Chat</h1>
                     <div>
                         {' '}
-                        {chat.map(({ username, message }, index) => {
+                        {chat.map((message) => {
                             return (
-                                <div key={index}>
-                                    <h3>
-                                        {username}: <span>{message}</span>
-                                    </h3>
+                                <div>
+                                    <div className="message-content">
+                                        <p>{message.message}</p>
+                                    </div>
+                                    <div className="message-info">
+                                        <p id="time">{message.time}</p>
+                                        <p id="author">{message.author}</p>
+                                    </div>
                                 </div>
                             );
                         })}
