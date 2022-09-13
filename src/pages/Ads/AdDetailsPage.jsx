@@ -17,7 +17,6 @@ function AdDetailsPage() {
         const response = await axios.get(url, {
             headers: { Authorization: `Bearer ${storedToken}` },
         });
-        //console.log(user)
         setAd(response.data);
     };
 

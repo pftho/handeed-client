@@ -22,7 +22,6 @@ function SignUpPage() {
         const value = e.target.value;
         const name = e.target.name;
         setFormData({ ...formData, [name]: value });
-        console.log(formData);
     };
 
     const handleSubmit = (e) => {

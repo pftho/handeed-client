@@ -15,7 +15,6 @@ function ProfilePage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(localImageUrl);
         axios.put(
             `${API_URL}/api/user/${user.id}`,
             { imageUrl: localImageUrl },
@@ -34,12 +33,10 @@ function ProfilePage() {
                 headers: { Authorization: `Bearer ${getToken()}` },
             })
             .then((response) => {
-                console.log(response);
                 setImageUrl(response.data.fileUrl);
             })
             .catch((err) => console.log(err));
     };
-    console.log(user);
 
     const handleCredit = async (_id) => {
         await axios.delete(`${API_URL}/ads/${_id}`, {
@@ -61,7 +58,6 @@ function ProfilePage() {
         setUser(updatedUser.data);
     };
 
-    console.log(user.ads);
 
     return (
         <div className="user-profile">

@@ -46,7 +46,6 @@ function CreateAd() {
                 headers: { Authorization: `Bearer ${getToken()}` },
             })
             .then((response) => {
-                console.log(response);
                 setImage(response.data.fileUrl);
             })
             .catch((err) =>
@@ -57,7 +56,6 @@ function CreateAd() {
     const handleSubmit = async (e) => {
         try {
             e.preventDefault();
-            console.log(user);
             //setOwner(user)
             await axios.post(
                 `${API_URL}/ads`,
