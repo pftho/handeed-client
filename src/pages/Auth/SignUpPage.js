@@ -11,6 +11,7 @@ function SignUpPage() {
         username: '',
         email: '',
         password: '',
+        address: ''
     });
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -66,6 +67,14 @@ function SignUpPage() {
                     type="password"
                     onChange={handleChange}
                     value={formData.password}
+                />
+                <label>Address</label>
+                <input
+                    name="address"
+                    required
+                    type="address"
+                    onChange={handleChange}
+                    value={formData.address}
                 />
                 <button type="submit">Sign Up</button>
             </form>
