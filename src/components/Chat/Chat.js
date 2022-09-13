@@ -21,7 +21,6 @@ function Chat({ socket, username, room }) {
     useEffect(() => {
         socket.on('receive_message', ({ username, message }) => {
             alert(`${username} ${message}`);
-            console.log('1', { username, message });
             console.log('2', username, message);
         });
         return () => socket.current.disconnect();
