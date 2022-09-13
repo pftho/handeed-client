@@ -56,10 +56,6 @@ const { user } = useContext(AuthContext);
         }
     };
 
-    const room = _id;
-    const joinRoom = () => {
-        socket.emit('join_room', room);
-    };
 
     return (
         <div className="ad-details">
