@@ -1,21 +1,28 @@
 import React, { useEffect, useState } from 'react';
 
 function Chat({ socket, username, room }) {
-    const [state, setState] = useState({ message: '', username: '' });
-    const [chat, setChat] = useState([]); // array of multiple objects of messages and usernames - used for display
-
-    //we use useEffect to be called everytime we recieve we recive a message
-    // We are saying that we listen for an even like in the backend
+    const [currentMessage, setCurrentMessage] = useState('');
+    const [chat, setChat] = useState([]);
 
     const onTextChange = (e) => {
-        setState({ ...state, [e.target.name]: e.target.value });
+        setCurrentMessage(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const { username, message } = state;
-        socket.emit('send_message', { username, message }); // sending to the backend the information
-        setState({ message: '', username });
+        if (currentMessage !== '') {
+            const messageData = {
+                room: room,
+                author: username,
+                message: currentMessage,
+                time:
+                    new Date(Date.now()).getHours() +
+                    ':' +
+                    new Date(Date.now()).getMinutes(),
+            };
+            await socket.emit('send_message', messageData); // sending to the backend the information
+            setCurrentMessage('');
+        }
     };
 
     useEffect(() => {
@@ -28,29 +35,22 @@ function Chat({ socket, username, room }) {
 
     return (
         <div>
-            <h1> Chat with Handeer </h1>
-            <div className="messageCard">
+            <div className="chat">
+                <h1> Contact owner </h1>
                 <form onSubmit={handleSubmit}>
-                    <div className="filds">
-                        <input
-                            type="text"
-                            name="username"
-                            onChange={(e) => onTextChange(e)}
-                            value={state.username}
-                        />
-                    </div>
                     <div>
                         <input
                             type="text"
                             name="message"
+                            placeholder="Hello..."
                             onChange={(e) => onTextChange(e)}
-                            value={state.message}
+                            value={currentMessage.message}
                         />
                     </div>
-                    <button>Send</button>
+                    <button>&#9658;</button>
                 </form>
                 <div className="chatRender">
-                    <h1>Messages Log</h1>
+                    <h1>Live Chat</h1>
                     <div>
                         {' '}
                         {chat.map(({ username, message }, index) => {

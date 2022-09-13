@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
 import Chat from '../Chat/Chat';
 import io from 'socket.io-client';
+import { AuthContext } from '../../context/auth.context';
+import { useContext } from 'react';
+
 const socket = io.connect('http://localhost:5006'); //we will use this to emmit and listen to events
 
 function AdDetails({
@@ -43,7 +46,7 @@ function AdDetails({
     //         </MapContainer>
     //     );
     // }
-
+    const { user } = useContext(AuthContext);
     const room = _id;
     const joinRoom = () => {
         if (room !== '') {
@@ -74,7 +77,7 @@ function AdDetails({
             <Link to={`/ads/${_id}/message`}>
                 <button onClick={joinRoom}>Chat with owner</button>
             </Link>
-            <Chat socket={socket} room={room} />
+            <Chat socket={socket} room={room} username={user.username} />
         </div>
     );
 }
