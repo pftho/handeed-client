@@ -15,8 +15,13 @@ function Chat({ username, room }) {
     useEffect(() => {
         socket.emit('join_room', room);
         socket.on('receive_message', (data) => {
-            setChat((chat) => [...chat, data]);
+            setChat([...chat, data]);
         });
+
+        socket.on('sync_messages', (data) => {
+            setChat(data);
+        });
+
         return () => {
             socket.off('receive_message');
             socket.off('disconnect');
