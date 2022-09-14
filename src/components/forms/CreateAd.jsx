@@ -6,10 +6,8 @@ import { useContext } from 'react';
 
 function CreateAd() {
     const navigate = useNavigate();
-    const [image, setImage] = useState("");
     const { user, getToken, setUser } = useContext(AuthContext);
     const [image, setImage] = useState('');
-    //const [owner, setOwner] = useState('')
 
     const [newAd, setNewAd] = useState({
         title: '',
@@ -19,7 +17,7 @@ function CreateAd() {
         category: '',
         condition: '',
         status: 'Available',
-        city: 'Paris',
+        city: '',
         image: '',
         owner: user.id,
     });
