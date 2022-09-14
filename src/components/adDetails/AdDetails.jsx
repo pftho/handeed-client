@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
 import Chat from '../Chat/Chat';
@@ -18,10 +18,11 @@ function AdDetails({
     city,
     owner,
     handleDelete,
+    chats,
 }) {
-    const { isOwner, checkIfOwner } = useContext(AuthContext);
+    const { isOwner, checkIfOwner, isLoggedIn } = useContext(AuthContext);
     const { adId } = useParams();
-
+    console.log(chats);
     checkIfOwner(adId);
 
     let map;
@@ -52,13 +53,6 @@ function AdDetails({
 
     const { user, setUser, getToken } = useContext(AuthContext);
     const [isChatVisible, setIsChatVisible] = React.useState(false);
-    const [chatInfo, setChatInfo] = React.useState({
-        chatname: '',
-        sender: '',
-        receiver: '',
-        ad: '',
-        messages: '',
-    });
 
     const handleRoomCreation = async () => {
         if (user.credits < 1) {
@@ -67,30 +61,23 @@ function AdDetails({
             );
             return;
         }
+
         const answer = window.confirm('Use 1 credit to contact this Hander');
 
         if (answer) {
             await axios.post(
-                `${API_URL}/api/contact`,
+                `${API_URL}/api/chat/contact`,
                 {
                     chatname: title,
                     sender: user.id,
                     receiver: owner._id,
                     ad: _id,
-                    messages: '',
+                    messages: [],
                 },
                 {
                     headers: { Authorization: `Bearer ${getToken()}` },
                 }
             );
-
-            //    const setChatInfo = {
-            //         chatname: title,
-            //         sender: user.id,
-            //         receiver: owner._id,
-            //         ad: _id,
-            //         messages: '',
-            //     },
 
             await axios.put(
                 `${API_URL}/api/user/${user.id}`,
@@ -99,11 +86,12 @@ function AdDetails({
                     headers: { Authorization: `Bearer ${getToken()}` },
                 }
             );
-            setIsChatVisible(true);
             setUser({ ...user, credits: user.credits - 1 });
+            setIsChatVisible(true);
         }
     };
 
+    console.log(chats.length);
     return (
         <div className="ad-details">
             <img src={image} alt="" />
@@ -128,11 +116,20 @@ function AdDetails({
 
             {map}
 
-            <button onClick={handleRoomCreation}>Chat with owner</button>
-
-            {isChatVisible ? (
-                <Chat room={_id} username={user.username} />
-            ) : null}
+            {(isChatVisible || chats.length) && isLoggedIn ? (
+                chats.map((chat) => {
+                    return (
+                        <Chat
+                            key={chat._id}
+                            room={chat._id}
+                            chat={chat}
+                            username={user.username}
+                        />
+                    );
+                })
+            ) : (
+                <button onClick={handleRoomCreation}>Chat with owner</button>
+            )}
         </div>
     );
 }

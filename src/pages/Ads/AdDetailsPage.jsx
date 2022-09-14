@@ -6,11 +6,10 @@ import { AuthContext } from '../../context/auth.context';
 
 function AdDetailsPage() {
     const [ad, setAd] = useState({});
+    const [chats, setChats] = useState({});
     const { adId } = useParams();
-    const { getToken, user } = useContext(AuthContext);
+    const { getToken } = useContext(AuthContext);
     const navigate = useNavigate();
-
-
 
     const getAd = async (url) => {
         const storedToken = localStorage.getItem('authToken');
@@ -20,11 +19,28 @@ function AdDetailsPage() {
         setAd(response.data);
     };
 
+    const getChats = async (url) => {
+        const storedToken = localStorage.getItem('authToken');
+        const response = await axios.get(url, {
+            headers: { Authorization: `Bearer ${storedToken}` },
+        });
+        console.log(response.data);
+        setChats(response.data);
+    };
+
     const API_URL = 'http://localhost:5005';
 
     useEffect(() => {
         try {
             getAd(`${API_URL}/ads/${adId}`);
+        } catch (error) {
+            console.log(error);
+        }
+    }, [adId]);
+
+    useEffect(() => {
+        try {
+            getChats(`${API_URL}/api/chat/${adId}`);
         } catch (error) {
             console.log(error);
         }
@@ -43,7 +59,7 @@ function AdDetailsPage() {
 
     return (
         <div>
-            <AdDetails {...ad} handleDelete={handleDelete} />
+            <AdDetails {...ad} chats={chats} handleDelete={handleDelete} />
         </div>
     );
 }
