@@ -23,6 +23,15 @@ function AdDetailsPage() {
             console.log(error);
         }
     }, [adId]);
+    
+    useEffect(() => {
+        const API_URL = 'http://localhost:5005';
+        try {
+            getAd(`${API_URL}/ads/${adId}`);
+        } catch (error) {
+            console.log(error);
+        }
+    }, [adId]);
 
     return (
         <div>

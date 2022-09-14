@@ -11,7 +11,7 @@ function AuthProviderWrapper(props) {
     const [isLoading, setIsLoaded] = useState(true);
     const [user, setUser] = useState(null);
     const [isOwner, setIsOwner] = useState(null);
-    
+
     const storeToken = (token) => {
         localStorage.setItem('authToken', token);
     };
@@ -38,7 +38,6 @@ function AuthProviderWrapper(props) {
                 })
                 .then((response) => {
                     const user = response.data;
-                    console.log(response.data)
                     setUser(user);
                     setIsLoggedIn(true);
                     setIsLoaded(false);
@@ -66,16 +65,14 @@ function AuthProviderWrapper(props) {
     };
 
     const checkIfOwner = (adId) => {
-        if(!user) {
-            setIsOwner(false)
-        }
-
-        else if(user.ads.includes(adId) ) {
-            setIsOwner(true)
+        if (!user) {
+            setIsOwner(false);
+        } else if (user.ads.includes(adId)) {
+            setIsOwner(true);
         } else {
-            setIsOwner(false)
+            setIsOwner(false);
         }
-    }
+    };
 
     useEffect(() => {
         authenticateUser();

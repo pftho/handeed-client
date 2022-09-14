@@ -6,7 +6,6 @@ import { AuthContext } from '../../context/auth.context';
 import axios from 'axios';
 const API_URL = 'http://localhost:5005';
 
-
 function AdDetails({
     _id,
     image,
@@ -19,13 +18,13 @@ function AdDetails({
     city,
     owner,
     handleDelete,
+    onChatOpen,
+    chats,
 }) {
+    const { isOwner, checkIfOwner, isLoggedIn } = useContext(AuthContext);
+    const { adId } = useParams();
+    checkIfOwner(adId);
 
-    const { isOwner, checkIfOwner } = useContext(AuthContext);
-    const {adId} = useParams()
-
-    checkIfOwner(adId)
-  
     let map;
     if (owner !== undefined) {
         const latlng = [
@@ -54,16 +53,32 @@ function AdDetails({
 
     const { user, setUser, getToken } = useContext(AuthContext);
     const [isChatVisible, setIsChatVisible] = React.useState(false);
-    const handleCredit = async () => {
+
+    const handleRoomCreation = async () => {
         if (user.credits < 1) {
             window.alert(
                 'You are out of hangers, make a donation to earn more'
             );
             return;
         }
+
         const answer = window.confirm('Use 1 credit to contact this Hander');
 
         if (answer) {
+            await axios.post(
+                `${API_URL}/api/chat/contact`,
+                {
+                    chatname: title,
+                    sender: user.id,
+                    receiver: owner._id,
+                    ad: _id,
+                    messages: [],
+                },
+                {
+                    headers: { Authorization: `Bearer ${getToken()}` },
+                }
+            );
+
             await axios.put(
                 `${API_URL}/api/user/${user.id}`,
                 { credits: user.credits - 1 },
@@ -71,8 +86,9 @@ function AdDetails({
                     headers: { Authorization: `Bearer ${getToken()}` },
                 }
             );
-            setIsChatVisible(true);
             setUser({ ...user, credits: user.credits - 1 });
+            setIsChatVisible(true);
+            onChatOpen();
         }
     };
 
@@ -100,11 +116,20 @@ function AdDetails({
 
             {map}
 
-            <button onClick={handleCredit}>Chat with owner</button>
-
-            {isChatVisible ? (
-                <Chat room={_id} username={user.username} />
-            ) : null}
+            {(isChatVisible || chats.length) && isLoggedIn ? (
+                chats.map((chat) => {
+                    return (
+                        <Chat
+                            key={chat._id}
+                            room={chat._id}
+                            chat={chat}
+                            username={user.username}
+                        />
+                    );
+                })
+            ) : (
+                <button onClick={handleRoomCreation}>Chat with owner</button>
+            )}
         </div>
     );
 }

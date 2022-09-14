@@ -17,7 +17,7 @@ function CreateAd() {
         category: '',
         condition: '',
         status: 'Available',
-        city: '',
+        city: 'Paris',
         image: '',
         owner: user.id,
     });
@@ -55,19 +55,24 @@ function CreateAd() {
 
     const handleSubmit = async (e) => {
         try {
-          e.preventDefault();
-          const response = await axios.post(`${API_URL}/ads`, {...newAd, image}, {headers: { Authorization: `Bearer ${getToken()}` }})
-          user.ads.push(response.data._id)
-          navigate("/ads")
-          
-          const updatedUser = await axios.get(
+            e.preventDefault();
+            const response = await axios.post(
+                `${API_URL}/ads`,
+                { ...newAd, image },
+                { headers: { Authorization: `Bearer ${getToken()}` } }
+            );
+            user.ads.push(response.data._id);
+
+            const updatedUser = await axios.get(
                 `${API_URL}/api/user/${user.id}`,
                 {
                     headers: { Authorization: `Bearer ${getToken()}` },
                 }
-            )
+            );
+
             setUser(updatedUser.data);
-          } catch (error) {
+            navigate('/ads');
+        } catch (error) {
             console.log(error);
         }
     };
