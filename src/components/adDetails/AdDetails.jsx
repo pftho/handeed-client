@@ -69,7 +69,7 @@ function AdDetails({
                         <button>Edit this ad</button>
                     </Link>
                     <button onClick={handleDelete}>
-                        <i class="fa-solid fa-trash"></i>
+                        <i className="fa-solid fa-trash"></i>
                     </button>
                 </>
             )}
