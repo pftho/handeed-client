@@ -15,7 +15,6 @@ function Chat({ username, room }) {
     useEffect(() => {
         socket.emit('join_room', room);
         socket.on('receive_message', (data) => {
-            console.log(data);
             setChat((chat) => [...chat, data]);
         });
         return () => {

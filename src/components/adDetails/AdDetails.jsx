@@ -3,6 +3,9 @@ import { Link, useParams } from 'react-router-dom';
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
 import Chat from '../Chat/Chat';
 import { AuthContext } from '../../context/auth.context';
+import axios from 'axios';
+const API_URL = 'http://localhost:5005';
+
 
 function AdDetails({
     _id,
@@ -49,8 +52,29 @@ function AdDetails({
         );
     }
 
-    const { user } = useContext(AuthContext);
-    // const handleCredit = () => {};
+    const { user, setUser, getToken } = useContext(AuthContext);
+    const [isChatVisible, setIsChatVisible] = React.useState(false);
+    const handleCredit = async () => {
+        if (user.credits < 1) {
+            window.alert(
+                'You are out of hangers, make a donation to earn more'
+            );
+            return;
+        }
+        const answer = window.confirm('Use 1 credit to contact this Hander');
+
+        if (answer) {
+            await axios.put(
+                `${API_URL}/api/user/${user.id}`,
+                { credits: user.credits - 1 },
+                {
+                    headers: { Authorization: `Bearer ${getToken()}` },
+                }
+            );
+            setIsChatVisible(true);
+            setUser({ ...user, credits: user.credits - 1 });
+        }
+    };
 
     return (
         <div className="ad-details">
@@ -76,9 +100,11 @@ function AdDetails({
 
             {map}
 
-            {/* <button onClick={handleCredit}>Chat with owner</button> */}
+            <button onClick={handleCredit}>Chat with owner</button>
 
-            {user ? <Chat room={_id} username={user.username} /> : null}
+            {isChatVisible ? (
+                <Chat room={_id} username={user.username} />
+            ) : null}
         </div>
     );
 }

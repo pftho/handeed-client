@@ -3,21 +3,20 @@ import React, { useState } from 'react';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/auth.context';
 import './ProfilePage.css';
-const API_URL = 'http://localhost:5005/api';
+const API_URL = 'http://localhost:5005';
 
 function ProfilePage() {
     const [localImageUrl, setImageUrl] = useState('');
 
-    const { user, getToken } = useContext(AuthContext);
+    const { user, getToken, setUser } = useContext(AuthContext);
     if (user === null) {
         return null;
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(localImageUrl);
         axios.put(
-            `${API_URL}/user/${user.id}`,
+            `${API_URL}/api/user/${user.id}`,
             { imageUrl: localImageUrl },
             {
                 headers: { Authorization: `Bearer ${getToken()}` },
@@ -30,16 +29,35 @@ function ProfilePage() {
         uploadData.append('imageUrl', e.target.files[0]);
 
         axios
-            .post(`${API_URL}/upload`, uploadData, {
+            .post(`${API_URL}/api/upload`, uploadData, {
                 headers: { Authorization: `Bearer ${getToken()}` },
             })
             .then((response) => {
-                console.log(response);
                 setImageUrl(response.data.fileUrl);
             })
             .catch((err) => console.log(err));
     };
-    console.log(user);
+
+    const handleCredit = async (_id) => {
+        await axios.delete(`${API_URL}/ads/${_id}`, {
+            headers: { Authorization: `Bearer ${getToken()}` },
+        });
+
+        await axios.put(
+            `${API_URL}/api/user/${user.id}`,
+            { credits: user.credits + 1 },
+            {
+                headers: { Authorization: `Bearer ${getToken()}` },
+            }
+        );
+
+        const updatedUser = await axios.get(`${API_URL}/api/user/${user.id}`, {
+            headers: { Authorization: `Bearer ${getToken()}` },
+        });
+
+        setUser(updatedUser.data);
+    };
+
 
     return (
         <div className="user-profile">
@@ -74,8 +92,26 @@ function ProfilePage() {
             </div>
 
             <div className="user-info">
-                <label>Reviews</label>
-                <p>{user.reviews}</p>
+                <label>My ads</label>
+                <ul>
+                    {user.ads.length ? (
+                        user.ads.map((ad) => {
+                            return (
+                                <li>
+                                    {' '}
+                                    {ad.title}{' '}
+                                    <button
+                                        onClick={() => handleCredit(ad._id)}
+                                    >
+                                        Confirm donation
+                                    </button>
+                                </li>
+                            );
+                        })
+                    ) : (
+                        <p>You don't have any ads yet</p>
+                    )}
+                </ul>
             </div>
         </div>
     );

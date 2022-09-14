@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/auth.context';
-import Credential from '../Credential/Credential';
+import Credits from '../Credits/Credits';
 import './Navbar.css';
 
 function Navbar() {
@@ -12,7 +12,7 @@ function Navbar() {
         <nav className="nav">
             {isLoggedIn && (
                 <>
-                    <Credential />
+                    <Credits />
                     <Link to="/ads">
                         <button>Our Ads</button>
                     </Link>

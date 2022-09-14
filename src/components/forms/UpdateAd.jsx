@@ -64,7 +64,6 @@ function UpdateAd() {
                 headers: { Authorization: `Bearer ${getToken()}` },
             })
             .then((response) => {
-                console.log(response);
                 setImage(response.data.fileUrl);
             })
             .catch((err) =>

@@ -3,7 +3,6 @@ import AdCard from '../adCard/AdCard'
 import axios from "axios";
 import { AuthContext } from '../../context/auth.context';
 
-
 function AdList() {
   const { isLoggedIn, isLoading } = useContext(AuthContext);
 
@@ -42,6 +41,7 @@ function AdList() {
     )}
     </div>
   )
+
 }
 
 export default AdList;
