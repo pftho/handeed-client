@@ -12,7 +12,6 @@ function AdList() {
     //     const response = await axios.get(`${API_URL}/ads`,
     //     { headers: { Authorization: `Bearer ${storedToken}` } }
     //     )
-    //     console.log(response)
     //     setAds(response.data)
 
     // }
@@ -30,9 +29,7 @@ function AdList() {
         getAds();
         // try {
         //     getAds()
-        //     console.log(ads)
         // } catch (error) {
-        //   console.log(error)
         // }
     }, []);
 
