@@ -16,10 +16,6 @@ function Navbar() {
                     <Link to="/ads">
                         <button>Our Ads</button>
                     </Link>
-
-                    <Link to="/message">
-                        <button>Messages</button>
-                    </Link>
                     <Link to={`/user/${user.id}`}>{user.username}</Link>
                     <Link to="/myads">My Ads</Link>
                     <Link to="/ads/create">Create an ad</Link>
