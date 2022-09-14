@@ -18,11 +18,11 @@ function AdDetails({
     city,
     owner,
     handleDelete,
+    onChatOpen,
     chats,
 }) {
     const { isOwner, checkIfOwner, isLoggedIn } = useContext(AuthContext);
     const { adId } = useParams();
-    console.log(chats);
     checkIfOwner(adId);
 
     let map;
@@ -88,10 +88,10 @@ function AdDetails({
             );
             setUser({ ...user, credits: user.credits - 1 });
             setIsChatVisible(true);
+            onChatOpen();
         }
     };
 
-    console.log(chats.length);
     return (
         <div className="ad-details">
             <img src={image} alt="" />

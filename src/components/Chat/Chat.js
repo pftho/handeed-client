@@ -8,19 +8,23 @@ function Chat({ username, room, chat }) {
     const [currentMessage, setCurrentMessage] = useState('');
     const [messages, setMessages] = useState([]);
     const { user } = React.useContext(AuthContext);
-
     const onTextChange = (e) => {
         setCurrentMessage(e.target.value);
     };
 
     useEffect(() => {
+        //send information to back
         socket.emit('join_room', room);
+
+        //listen from back for "sync_messages" event
         socket.on('receive_message', (data) => {
             console.log('message', data);
             setMessages((messages) => [...messages, data]);
         });
 
+        //listen for "sync_messages" event
         socket.on('sync_messages', (data) => {
+            console.log(data);
             setMessages(data);
         });
 
@@ -37,16 +41,11 @@ function Chat({ username, room, chat }) {
                 room: chat._id,
                 author: user.id,
                 message: currentMessage,
-                time:
-                    new Date(Date.now()).getHours() +
-                    ':' +
-                    new Date(Date.now()).getMinutes(),
+                time: new Date(),
             }; // to push in the message list
-            //update model
 
             await socket.emit('send_message', messageData);
             setMessages((messages) => [...messages, messageData]);
-            setCurrentMessage('');
         }
     };
 
@@ -70,7 +69,9 @@ function Chat({ username, room, chat }) {
                                             <p>{message.message}</p>
                                         </div>
                                         <div className="message-info">
-                                            <p id="time">{message.time}</p>
+                                            <p id="time">
+                                                {message.time.toString()}
+                                            </p>
                                             <p id="author">{message.author}</p>
                                         </div>
                                     </div>
