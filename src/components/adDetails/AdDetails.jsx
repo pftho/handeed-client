@@ -1,11 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
 import Chat from '../Chat/Chat';
 import { AuthContext } from '../../context/auth.context';
 import axios from 'axios';
 const API_URL = 'http://localhost:5005';
-
 
 function AdDetails({
     _id,
@@ -20,12 +19,11 @@ function AdDetails({
     owner,
     handleDelete,
 }) {
-
     const { isOwner, checkIfOwner } = useContext(AuthContext);
-    const {adId} = useParams()
+    const { adId } = useParams();
 
-    checkIfOwner(adId)
-  
+    checkIfOwner(adId);
+
     let map;
     if (owner !== undefined) {
         const latlng = [
@@ -54,7 +52,15 @@ function AdDetails({
 
     const { user, setUser, getToken } = useContext(AuthContext);
     const [isChatVisible, setIsChatVisible] = React.useState(false);
-    const handleCredit = async () => {
+    const [chatInfo, setChatInfo] = React.useState({
+        chatname: '',
+        sender: '',
+        receiver: '',
+        ad: '',
+        messages: '',
+    });
+
+    const handleRoomCreation = async () => {
         if (user.credits < 1) {
             window.alert(
                 'You are out of hangers, make a donation to earn more'
@@ -64,6 +70,28 @@ function AdDetails({
         const answer = window.confirm('Use 1 credit to contact this Hander');
 
         if (answer) {
+            await axios.post(
+                `${API_URL}/api/contact`,
+                {
+                    chatname: title,
+                    sender: user.id,
+                    receiver: owner._id,
+                    ad: _id,
+                    messages: '',
+                },
+                {
+                    headers: { Authorization: `Bearer ${getToken()}` },
+                }
+            );
+
+            //    const setChatInfo = {
+            //         chatname: title,
+            //         sender: user.id,
+            //         receiver: owner._id,
+            //         ad: _id,
+            //         messages: '',
+            //     },
+
             await axios.put(
                 `${API_URL}/api/user/${user.id}`,
                 { credits: user.credits - 1 },
@@ -100,7 +128,7 @@ function AdDetails({
 
             {map}
 
-            <button onClick={handleCredit}>Chat with owner</button>
+            <button onClick={handleRoomCreation}>Chat with owner</button>
 
             {isChatVisible ? (
                 <Chat room={_id} username={user.username} />
