@@ -11,7 +11,7 @@ function SignUpPage() {
         username: '',
         email: '',
         password: '',
-        address: ''
+        address: '',
     });
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -76,6 +76,9 @@ function SignUpPage() {
                     value={formData.address}
                 />
                 <button type="submit">Sign Up</button>
+                {errorMessage && (
+                    <p className="errorMessage"> {errorMessage} </p>
+                )}
             </form>
         </div>
     );

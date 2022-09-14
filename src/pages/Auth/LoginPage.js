@@ -31,6 +31,7 @@ function LoginPage() {
                 navigate('/ads');
             })
             .catch((err) => {
+                console.log(err);
                 const error = err.response.data.errorMessage;
                 setErrorMessage(error);
             });
@@ -57,6 +58,9 @@ function LoginPage() {
                     value={formData.password}
                 />
                 <button type="submit">Log in</button>
+                {errorMessage && (
+                    <p className="errorMessage"> {errorMessage} </p>
+                )}
             </form>
         </div>
     );
