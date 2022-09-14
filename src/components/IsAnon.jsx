@@ -14,7 +14,7 @@ function IsAnon( { children } ) {
     return <Navigate to="/" />;
   } else {
     // If the user is not logged in, allow to see the page 
-    return children;
+    //return children;
   }
 }
  

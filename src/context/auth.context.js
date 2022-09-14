@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
 const API_URL = 'http://localhost:5005';
 const AuthContext = React.createContext();
 
@@ -9,7 +10,8 @@ function AuthProviderWrapper(props) {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoading, setIsLoaded] = useState(true);
     const [user, setUser] = useState(null);
-
+    const [isOwner, setIsOwner] = useState(null);
+    
     const storeToken = (token) => {
         localStorage.setItem('authToken', token);
     };
@@ -36,6 +38,7 @@ function AuthProviderWrapper(props) {
                 })
                 .then((response) => {
                     const user = response.data;
+                    console.log(response.data)
                     setUser(user);
                     setIsLoggedIn(true);
                     setIsLoaded(false);
@@ -51,6 +54,7 @@ function AuthProviderWrapper(props) {
             setUser(null);
         }
     };
+
     const removeToken = () => {
         localStorage.removeItem('authToken');
     };
@@ -61,20 +65,35 @@ function AuthProviderWrapper(props) {
         navigate('/auth/login');
     };
 
+    const checkIfOwner = (adId) => {
+        if(!user) {
+            setIsOwner(false)
+        }
+
+        else if(user.ads.includes(adId) ) {
+            setIsOwner(true)
+        } else {
+            setIsOwner(false)
+        }
+    }
+
     useEffect(() => {
         authenticateUser();
     }, []);
+
     return (
         <AuthContext.Provider
             value={{
                 isLoggedIn,
                 isLoading,
                 user,
+                isOwner,
                 setUser,
                 storeToken,
                 getToken,
                 authenticateUser,
                 logOutUser,
+                checkIfOwner,
             }}
         >
             {props.children}

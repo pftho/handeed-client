@@ -6,9 +6,11 @@ import { useContext } from 'react';
 
 function CreateAd() {
     const navigate = useNavigate();
+    const [image, setImage] = useState("");
     const { user, getToken, setUser } = useContext(AuthContext);
     const [image, setImage] = useState('');
     //const [owner, setOwner] = useState('')
+
     const [newAd, setNewAd] = useState({
         title: '',
         description: '',
@@ -55,23 +57,19 @@ function CreateAd() {
 
     const handleSubmit = async (e) => {
         try {
-            e.preventDefault();
-            //setOwner(user)
-            await axios.post(
-                `${API_URL}/ads`,
-                { ...newAd, image },
-                { headers: { Authorization: `Bearer ${getToken()}` } }
-            );
-            const updatedUser = await axios.get(
+          e.preventDefault();
+          const response = await axios.post(`${API_URL}/ads`, {...newAd, image}, {headers: { Authorization: `Bearer ${getToken()}` }})
+          user.ads.push(response.data._id)
+          navigate("/ads")
+          
+          const updatedUser = await axios.get(
                 `${API_URL}/api/user/${user.id}`,
                 {
                     headers: { Authorization: `Bearer ${getToken()}` },
                 }
-            );
-
+            )
             setUser(updatedUser.data);
-            navigate('/ads');
-        } catch (error) {
+          } catch (error) {
             console.log(error);
         }
     };
