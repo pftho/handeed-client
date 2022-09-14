@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AdDetails from '../../components/adDetails/AdDetails';
 import { AuthContext } from '../../context/auth.context';
+import './AdDetailsPage.css';
 
 function AdDetailsPage() {
     const [ad, setAd] = useState({});
@@ -10,9 +11,9 @@ function AdDetailsPage() {
     const { adId } = useParams();
     const { getToken } = useContext(AuthContext);
     const navigate = useNavigate();
+    const API_URL = 'http://localhost:5005';
 
-    const getAd = async () => {
-        const url = `${API_URL}/ads/${adId}`;
+    const getAd = async (url) => {
         const storedToken = localStorage.getItem('authToken');
         const response = await axios.get(url, {
             headers: { Authorization: `Bearer ${storedToken}` },
@@ -29,11 +30,9 @@ function AdDetailsPage() {
         setChats(response.data);
     };
 
-    const API_URL = 'http://localhost:5005';
-
     useEffect(() => {
         try {
-            getAd();
+            getAd(`${API_URL}/ads/${adId}`);
         } catch (error) {
             console.log(error);
         }

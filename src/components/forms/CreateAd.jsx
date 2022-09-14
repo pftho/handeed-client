@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../context/auth.context';
 import { useContext } from 'react';
+import './CreadAd.css';
 
 function CreateAd() {
     const navigate = useNavigate();

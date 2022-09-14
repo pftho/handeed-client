@@ -3,6 +3,8 @@ import React from 'react';
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/auth.context';
+import './AuthForm.css';
+
 const API_URL = 'http://localhost:5005';
 
 function LoginPage() {

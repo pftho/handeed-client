@@ -2,7 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import { AuthContext } from '../../context/auth.context';
 import { useContext } from 'react';
+import './MyAdPage.css';
 const API_URL = 'http://localhost:5005';
+
 function MyAdPage() {
     const { user, getToken, setUser } = useContext(AuthContext);
     if (user === null) {

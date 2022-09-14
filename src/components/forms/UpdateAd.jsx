@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../context/auth.context';
+import './UpdateAd.css';
 
 function UpdateAd() {
     const { user, getToken } = useContext(AuthContext);
@@ -29,7 +30,7 @@ function UpdateAd() {
             headers: { Authorization: `Bearer ${getToken()}` },
         });
         setAdToUpdate(response.data);
-        setImage(response.data.image)
+        setImage(response.data.image);
     };
 
     useEffect(() => {
