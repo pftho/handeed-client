@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './AuthForm.css';
 
 const API_URL = 'http://localhost:5005';
 

@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
 import Chat from '../Chat/Chat';
 import { AuthContext } from '../../context/auth.context';
 import axios from 'axios';
+import './AdDetails.css';
 const API_URL = 'http://localhost:5005';
 
 function AdDetails({

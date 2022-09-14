@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import io from 'socket.io-client';
 import { AuthContext } from '../../context/auth.context';
+import './Chat.css';
 const socket = io.connect('http://localhost:5006');
 
 function Chat({ username, room, chat }) {
