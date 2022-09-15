@@ -36,7 +36,7 @@ function CreateAd() {
         });
     };
 
-    const API_URL = 'http://localhost:5005';
+    const API_URL = `${process.env.REACT_APP_API_URL}/api`;
 
     const handleFileUpload = (e) => {
         const uploadData = new FormData();
@@ -65,7 +65,7 @@ function CreateAd() {
             user.ads.push(response.data._id);
 
             const updatedUser = await axios.get(
-                `${API_URL}/api/user/${user.id}`,
+                `${API_URL}/profile/user/${user.id}`,
                 {
                     headers: { Authorization: `Bearer ${getToken()}` },
                 }
