@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './AuthForm.css';
 
 const API_URL = 'http://localhost:5005';
@@ -48,6 +48,7 @@ function SignUpPage() {
                     name="username"
                     required
                     type="text"
+                    placeholder="ironhacker@gmail.com"
                     onChange={handleChange}
                     value={formData.username}
                 />
@@ -55,6 +56,7 @@ function SignUpPage() {
                 <input
                     name="email"
                     type="email"
+                    placeholder="ironhacker@gmail.com"
                     required
                     onChange={handleChange}
                     value={formData.email}
@@ -62,6 +64,7 @@ function SignUpPage() {
                 <label>Password</label>
                 <input
                     name="password"
+                    placeholder="********"
                     required
                     type="password"
                     onChange={handleChange}
@@ -71,6 +74,7 @@ function SignUpPage() {
                 <input
                     name="address"
                     required
+                    placeholder="42 Ironhack Street 01100 TechCity Devland"
                     type="address"
                     onChange={handleChange}
                     value={formData.address}
@@ -82,6 +86,9 @@ function SignUpPage() {
                     <p className="errorMessage"> {errorMessage} </p>
                 )}
             </form>
+            <p className="other-auth">
+                Already have an account? <Link to="/auth/login">Login</Link>
+            </p>
         </div>
     );
 }
