@@ -3,6 +3,7 @@ import axios from 'axios';
 import { AuthContext } from '../../context/auth.context';
 import { useContext } from 'react';
 import './MyAdPage.css';
+import AdCard from '../../components/adCard/AdCard';
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5005';
 
 function MyAdPage() {
@@ -43,15 +44,14 @@ function MyAdPage() {
                     {user.ads.length ? (
                         user.ads.map((ad) => {
                             return (
-                                <li key={ad._id}>
-                                    {' '}
-                                    {ad.title}{' '}
+                                <div key={ad._id}>
+                                    <AdCard {...ad} />
                                     <button
                                         onClick={() => handleCredit(ad._id)}
                                     >
                                         Confirm donation
                                     </button>
-                                </li>
+                                </div>
                             );
                         })
                     ) : (
