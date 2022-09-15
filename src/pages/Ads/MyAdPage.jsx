@@ -3,7 +3,7 @@ import axios from 'axios';
 import { AuthContext } from '../../context/auth.context';
 import { useContext } from 'react';
 import './MyAdPage.css';
-const API_URL = 'http://localhost:5005';
+const API_URL = `${process.env.REACT_APP_API_URL}/api`;
 
 function MyAdPage() {
     const { user, getToken, setUser } = useContext(AuthContext);
@@ -17,16 +17,19 @@ function MyAdPage() {
         });
 
         await axios.put(
-            `${API_URL}/api/user/${user.id}`,
+            `${API_URL}/profile/user/${user.id}`,
             { credits: user.credits + 1 },
             {
                 headers: { Authorization: `Bearer ${getToken()}` },
             }
         );
 
-        const updatedUser = await axios.get(`${API_URL}/api/user/${user.id}`, {
-            headers: { Authorization: `Bearer ${getToken()}` },
-        });
+        const updatedUser = await axios.get(
+            `${API_URL}/profile/user/${user.id}`,
+            {
+                headers: { Authorization: `Bearer ${getToken()}` },
+            }
+        );
 
         setUser(updatedUser.data);
     };

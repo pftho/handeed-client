@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5005';
+const API_URL = `${process.env.REACT_APP_API_URL}/api`;
 const AuthContext = React.createContext();
 
 function AuthProviderWrapper(props) {
@@ -30,7 +30,7 @@ function AuthProviderWrapper(props) {
                 })
                 .then((response) => {
                     return axios.get(
-                        `${API_URL}/api/user/${response.data._id}`,
+                        `${API_URL}/profile/user/${response.data._id}`,
                         {
                             headers: { Authorization: `Bearer ${storeToken}` },
                         }

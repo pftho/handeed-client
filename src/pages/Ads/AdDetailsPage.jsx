@@ -11,7 +11,7 @@ function AdDetailsPage() {
     const { adId } = useParams();
     const { getToken } = useContext(AuthContext);
     const navigate = useNavigate();
-    const API_URL = 'http://localhost:5005';
+    const API_URL = `${process.env.REACT_APP_API_URL}/api`;
 
     const getAd = async (url) => {
         const storedToken = localStorage.getItem('authToken');
@@ -22,7 +22,7 @@ function AdDetailsPage() {
     };
 
     const getChats = async () => {
-        const url = `${API_URL}/api/chat/${adId}`;
+        const url = `${API_URL}/chat/${adId}`;
         const storedToken = localStorage.getItem('authToken');
         const response = await axios.get(url, {
             headers: { Authorization: `Bearer ${storedToken}` },
