@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import io from 'socket.io-client';
 import { AuthContext } from '../../context/auth.context';
 import './Chat.css';
-const socket = io.connect('http://localhost:5006');
+const socket = io.connect(process.env.REACT_APP_WS_URL);
 
 function Chat({ username, room, chat }) {
     const [currentMessage, setCurrentMessage] = useState('');
@@ -33,7 +33,6 @@ function Chat({ username, room, chat }) {
             socket.off('receive_message');
             socket.off('disconnect');
         };
-        // eslint-disable-next-line
     }, []);
 
     const handleSubmit = async (e) => {
