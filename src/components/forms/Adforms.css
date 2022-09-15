@@ -3,7 +3,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 95vh;
     width: 100%;
 }
 
@@ -34,9 +33,9 @@
     background-color: var(--yellow);
 }
 
-.form-container h1 {
+.form-container h2 {
     font-size: 48px;
-    color: white;
+    color: red;
 }
 
 .form-container button:hover {

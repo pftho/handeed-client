@@ -2,8 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import { AuthContext } from '../../../context/auth.context';
 import { useContext } from 'react';
-import './MyAdPage.css';
-import AdCard from '../../components/adCard/AdCard';
+import './MyAdsPage.css';
+import AdCard from '../../../components/adCard/AdCard';
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5005';
 
 function MyAdPage() {
