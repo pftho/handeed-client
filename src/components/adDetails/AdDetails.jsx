@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import Chat from '../Chat/Chat';
+// import Chat from '../Chat/Chat';
 import { AuthContext } from '../../context/auth.context';
 import axios from 'axios';
 import './AdDetails.css';
@@ -119,14 +119,17 @@ function AdDetails({
 
             {(isChatVisible || chats.length) && isLoggedIn ? (
                 chats.map((chat) => {
-                    return (
+                    return null;
+                    {
+                        /* return (
                         <Chat
                             key={chat._id}
                             room={chat._id}
                             chat={chat}
                             username={user.username}
                         />
-                    );
+                    ); */
+                    }
                 })
             ) : (
                 <button onClick={handleRoomCreation}>Chat with owner</button>

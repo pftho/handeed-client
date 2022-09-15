@@ -62,7 +62,7 @@ function AdDetailsPage() {
         <div>
             <AdDetails
                 {...ad}
-                chats={chats}
+                chats={[] /**chats*/}
                 onChatOpen={() => {
                     getChats();
                 }}
