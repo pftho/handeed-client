@@ -5,7 +5,7 @@ import './AdList.css';
 import { AuthContext } from '../../context/auth.context';
 
 function AdList() {
-    const { isLoggedIn, isLoading } = useContext(AuthContext);
+    const { isLoggedIn } = useContext(AuthContext);
 
     const [ads, setAds] = useState([]);
 
