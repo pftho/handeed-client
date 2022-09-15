@@ -22,16 +22,16 @@ function AdDetails({
     onChatOpen,
     chats,
 }) {
-   
-    const { isOwner, checkIfOwner, user, setUser, getToken, isLoggedIn } = useContext(AuthContext);
-    const {adId} = useParams()
-    
+    const { isOwner, checkIfOwner, user, setUser, getToken, isLoggedIn } =
+        useContext(AuthContext);
+    const { adId } = useParams();
+
     const [isChatVisible, setIsChatVisible] = React.useState(false);
 
     useEffect(() => {
-        checkIfOwner(adId)
-    }, [adId, checkIfOwner])
-  
+        checkIfOwner(adId);
+    }, [adId, checkIfOwner]);
+
     let map;
     if (owner !== undefined && owner.location !== undefined) {
         const latlng = [

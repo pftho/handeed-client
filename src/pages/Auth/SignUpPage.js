@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './AuthForm.css';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5005';
@@ -40,10 +40,10 @@ function SignUpPage() {
     };
 
     return (
-        <div>
+        <div className="form-container">
             {' '}
             <h1>Sign Up</h1>
-            <form onSubmit={handleSubmit}>
+            <form className="form" onSubmit={handleSubmit}>
                 <label>User Name</label>
                 <input
                     name="username"
@@ -51,6 +51,7 @@ function SignUpPage() {
                     type="text"
                     onChange={handleChange}
                     value={formData.username}
+                    placeholder="Lloyd"
                 />
                 <label>Email</label>
                 <input
@@ -59,6 +60,7 @@ function SignUpPage() {
                     required
                     onChange={handleChange}
                     value={formData.email}
+                    placeholder="ironhacker@gmail.com"
                 />
                 <label>Password</label>
                 <input
@@ -67,6 +69,7 @@ function SignUpPage() {
                     type="password"
                     onChange={handleChange}
                     value={formData.password}
+                    placeholder="********"
                 />
                 <label>Address</label>
                 <input
@@ -75,12 +78,21 @@ function SignUpPage() {
                     type="address"
                     onChange={handleChange}
                     value={formData.address}
+                    placeholder="42 Ironhack Street 01100 TechCity Devland"
                 />
-                <button type="submit">Sign Up</button>
+                <button className="form-btn" type="submit">
+                    Sign Up
+                </button>
                 {errorMessage && (
                     <p className="errorMessage"> {errorMessage} </p>
                 )}
             </form>
+            <p>
+                Already have an account?{' '}
+                <Link className="other-auth-link" to="/auth/login">
+                    Login
+                </Link>
+            </p>
         </div>
     );
 }

@@ -18,7 +18,7 @@ function Navbar() {
 
     useEffect(() => {
         isLoggedPreviously();
-    }, []);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         window
