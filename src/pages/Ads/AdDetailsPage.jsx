@@ -43,7 +43,7 @@ function AdDetailsPage() {
             getChats();
         } catch (error) {
             console.log(error);
-        }
+        } // eslint-disable-next-line
     }, [adId]);
 
     const handleDelete = async () => {

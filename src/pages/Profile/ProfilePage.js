@@ -8,7 +8,7 @@ const API_URL = 'http://localhost:5005';
 function ProfilePage() {
     const [localImageUrl, setImageUrl] = useState('');
 
-    const { user, getToken, setUser } = useContext(AuthContext);
+    const { user, getToken } = useContext(AuthContext);
     if (user === null) {
         return null;
     }
@@ -37,9 +37,6 @@ function ProfilePage() {
             })
             .catch((err) => console.log(err));
     };
-
-    
-
 
     return (
         <div className="user-profile">
@@ -72,8 +69,6 @@ function ProfilePage() {
                 <label>Home adress</label>
                 <p>{user.address}</p>
             </div>
-
-           
         </div>
     );
 }

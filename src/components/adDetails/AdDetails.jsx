@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import Chat from '../Chat/Chat';
 import { AuthContext } from '../../context/auth.context';
 import axios from 'axios';
