@@ -1,36 +1,18 @@
-import React, { useEffect, useState, useContext } from 'react';
-import AdCard from '../adCard/AdCard';
-import axios from 'axios';
-import './AdList.css';
+import React, { useContext } from 'react';
 import { AuthContext } from '../../context/auth.context';
+import AdCard from '../adCard/AdCard';
+import Spinner from '../spinner/Spinner';
+import './AdList.css';
 
-function AdList() {
-    const { isLoggedIn } = useContext(AuthContext);
 
-    const [ads, setAds] = useState([]);
+function AdList({ ads }) {
+    const { isLoggedIn, isLoading } = useContext(AuthContext);
 
-    const getAds = async () => {
-        const API_URL =
-            process.env.REACT_APP_API_URL || 'http://localhost:5005';
-
-        const storedToken = localStorage.getItem('authToken');
-        const response = await axios.get(`${API_URL}/api/ads`, {
-            headers: { Authorization: `Bearer ${storedToken}` },
-        });
-        console.log(response);
-        setAds(response.data);
-    };
-
-    useEffect(() => {
-        try {
-            getAds();
-        } catch (error) {
-            console.log(error);
-        }
-    }, []);
 
     return (
         <div className="ads-list">
+            {isLoading && <Spinner />}
+
             {isLoggedIn && (
                 <>
                     {ads.map((ad) => (

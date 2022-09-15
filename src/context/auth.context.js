@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -8,7 +8,7 @@ const AuthContext = React.createContext();
 function AuthProviderWrapper(props) {
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [isLoading, setIsLoaded] = useState(true);
+    const [isLoading, setIsLoaded] = useState(false);
     const [user, setUser] = useState(null);
     const [isOwner, setIsOwner] = useState(null);
 
@@ -20,16 +20,33 @@ function AuthProviderWrapper(props) {
         return localStorage.getItem('authToken', token);
     };
 
-    const authenticateUser = () => {
-        const storeToken = localStorage.getItem('authToken');
-
-        if (storeToken) {
-            axios
-                .get(`${API_URL}/api/auth/verify`, {
+    const isLoggedPreviously = async () => {
+        if (user != null) {
+            await axios
+                .get(`${API_URL}/api/profile/user/${user._id}`, {
                     headers: { Authorization: `Bearer ${storeToken}` },
                 })
                 .then((response) => {
-                    return axios.get(
+                    const user = response.data;
+                    setUser(user);
+                    setIsLoggedIn(true);
+                    setIsLoaded(false);
+                });
+        } else {
+            await authenticateUser();
+        }
+    };
+
+    const authenticateUser = async () => {
+        const storeToken = localStorage.getItem('authToken');
+        if (storeToken) {
+            setIsLoaded(true);
+            await axios
+                .get(`${API_URL}/api/auth/verify`, {
+                    headers: { Authorization: `Bearer ${storeToken}` },
+                })
+                .then(async (response) => {
+                    return await axios.get(
                         `${API_URL}/api/profile/user/${response.data._id}`,
                         {
                             headers: { Authorization: `Bearer ${storeToken}` },
@@ -67,16 +84,12 @@ function AuthProviderWrapper(props) {
     const checkIfOwner = (adId) => {
         if (!user) {
             setIsOwner(false);
-        } else if (user.ads.includes(adId)) {
+        } else if (user.ads.map((ad) => ad._id).includes(adId)) {
             setIsOwner(true);
         } else {
             setIsOwner(false);
         }
     };
-
-    useEffect(() => {
-        authenticateUser();
-    }, []);
 
     return (
         <AuthContext.Provider
@@ -91,6 +104,7 @@ function AuthProviderWrapper(props) {
                 authenticateUser,
                 logOutUser,
                 checkIfOwner,
+                isLoggedPreviously,
             }}
         >
             {props.children}

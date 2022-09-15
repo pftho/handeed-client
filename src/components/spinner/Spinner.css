@@ -1,0 +1,22 @@
+.spinner {
+    padding: 2rem;
+    border: 9px solid var(--dark-orange);
+    border-bottom-color: transparent;
+    border-radius: 50px;
+    animation: rotate 1s infinite linear;
+    height: 0;
+    width: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+ }
+ 
+ @keyframes rotate {
+    from {
+       transform: rotate(0deg);
+    }
+ 
+    to {
+       transform: rotate(360deg);
+    }
+ }

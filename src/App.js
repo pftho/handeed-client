@@ -5,13 +5,15 @@ import SignUpPage from './pages/Auth/SignUpPage';
 import LoginPage from './pages/Auth/LoginPage';
 import ProfilePage from './pages/Profile/ProfilePage';
 import LandingPage from './pages/LandingPage';
-import AdDetailsPage from './pages/Ads/AdDetailsPage';
+import AdDetailsPage from './pages/Ads/AdDetailsPage/AdDetailsPage';
 import CreateAd from './components/forms/CreateAd';
-import AdListPage from './pages/Ads/AdListPage';
+import AdListPage from './pages/Ads/AdListPage/AdListPage';
 import IsPrivate from './components/IsPrivate';
 import UpdateAd from './components/forms/UpdateAd';
 import ErrorPage from './pages/ErrorPage';
-import MyAdPage from './pages/Ads/MyAdPage';
+import MyAdPage from './pages/Ads/MyAdsPage/MyAdsPage';
+import Footer from './components/footer/Footer';
+
 
 function App() {
     return (
@@ -51,6 +53,7 @@ function App() {
                 <Route path={'*'} element={<ErrorPage />} />
                 <Route path={'/page-not-found'} element={<ErrorPage />} />
             </Routes>
+                <Footer/>
         </div>
     );
 }

@@ -1,0 +1,10 @@
+.filters-ad-list {
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (min-width: 1200px) {
+    .filters-ad-list {
+        flex-direction: row;
+    }
+}

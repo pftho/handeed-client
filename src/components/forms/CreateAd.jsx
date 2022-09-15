@@ -18,7 +18,6 @@ function CreateAd() {
         category: '',
         condition: '',
         status: 'Available',
-        city: 'Paris',
         image: '',
         owner: user.id,
     });

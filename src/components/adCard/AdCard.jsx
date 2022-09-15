@@ -3,14 +3,16 @@ import './AdCard.css';
 
 function AdCard({ _id, image, title, brand, size }) {
     return (
-        <div className="ad-card">
-            <Link to={`/ads/${_id}`}>
-                <img src={image} alt="" />
-                <h3>{title}</h3>
-                <p>{brand}</p>
-                <p>{size}</p>
-            </Link>
-        </div>
+        <Link to={`/ads/${_id}`}>
+            <div className="ad-card">
+                <img src={image} alt="" className="ad-card-img"  />
+                <div className="ad-card-content">
+                    <h3>{title}</h3>
+                    <p>{brand}</p>
+                    <p>{size}</p>
+                </div>
+            </div>
+        </Link>
     );
 }
 
