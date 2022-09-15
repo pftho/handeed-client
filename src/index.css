@@ -16,6 +16,8 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: var(--dark);
+    min-height: 100vh;
+    flex-grow: 1
 }
 
 h1,
@@ -37,6 +39,7 @@ h3 {
 }
 p {
     font-size: 18px;
+    margin: 0.5rem 0;
 }
 
 h1,

@@ -1,0 +1,86 @@
+.landing-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    
+}
+
+.landing-hero {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 1rem;
+}
+
+.landing-hero h2 {
+    font-size: 20px;
+    margin: 0.5rem;
+    font-family: 'quicksand';
+}
+
+.button {
+    padding: 1rem;
+    border: none;
+    border-radius: 3px;
+    width: 35%;
+    font-size: 15px;
+    text-align: center;
+    font-family: 'quicksand', 'Roboto', sans-serif;
+    box-shadow: 10px 10px 0px var(--dark);
+    background: linear-gradient(
+        to bottom right,
+        var(--orange),
+        var(--dark-orange)
+    );
+    color: white;
+    margin: 1rem;
+}
+
+.getting-started {
+    margin: 1rem;
+    padding: 1rem 0;
+    text-align: justify;
+}
+
+.view-catalogue {
+    background: linear-gradient(
+        to bottom right,
+        var(--yellow),
+        var(--orange)
+    ); 
+}
+
+
+@media screen and (min-width: 1200px) {
+    .landing-hero {
+        display: flex;
+        flex-direction: column;
+        margin: 2rem 1rem 2rem 5rem;
+        background-color: white;
+        width: 30%;
+        padding: 3rem 1rem 3rem 3rem;
+       border-radius: 10px;
+       z-index: 5;
+    }
+
+    .landing-hero-wrapper {
+        display: flex;
+        align-items: center;
+        background-image: url('../../assets/jeans.jpg');
+        background-size: cover;
+        width: 100%;
+        height: 50%;
+        /* filter: brightness(50%); */
+
+    }
+
+    .getting-started {
+      margin: 2rem ;  
+   
+    }
+
+    .landing-cards {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
