@@ -168,9 +168,16 @@ function CreateAd() {
                     hidden
                 />
 
-                <input name="image" type="file" onChange={handleFileUpload} />
+                <input
+                    className="file-input-btn"
+                    name="image"
+                    type="file"
+                    onChange={handleFileUpload}
+                />
 
-                <button type="submit">Create</button>
+                <button className="submit-form-btn" type="submit">
+                    Create
+                </button>
             </form>
         </div>
     );

@@ -39,15 +39,6 @@ p {
     font-size: 18px;
 }
 
-h1,
-h2,
-h3,
-h4,
-h4,
-h6 {
-    font-family: 'abril fatface', 'Roboto', sans-serif;
-}
-
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
         monospace;
