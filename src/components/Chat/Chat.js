@@ -67,7 +67,7 @@ function Chat({ username, chat }) {
                 author: user.id,
                 message: currentMessage,
                 time: new Date(),
-            }; // to push in the message list
+            };
 
             await socket.emit('send_message', messageData);
 
@@ -75,19 +75,23 @@ function Chat({ username, chat }) {
             setCurrentMessage('');
         }
     };
-
-    // console.table(chat.messages);
+    function myFunction() {
+        const chatElement = document.getElementById('chat');
+        let x = chatElement.scrollLeft;
+        let y = chatElement.scrollTop;
+    }
 
     return (
         <div>
-            <div className="chat">
-                <h1> Contact owner </h1>
-                <p>sender: {chat.sender.username}</p>
-                <p>receiver: {chat.receiver.username}</p>
-                <div>
-                    <div className="chatRender">
+            <div className="chat-container">
+                <div className="chat-header">
+                    <h1>Live Chat</h1>
+                    <p>From: {chat.sender.username}</p>
+                    <p>To: {chat.receiver.username}</p>
+                </div>
+                <div id="chat" onscroll="myFunction()">
+                    <div className="chat-render">
                         <div className="message-container">
-                            <h1>Live Chat</h1>{' '}
                             {messages.map((message) => {
                                 return (
                                     <div
@@ -113,18 +117,17 @@ function Chat({ username, chat }) {
                             })}
                         </div>
                     </div>
-
-                    <form onSubmit={handleSubmit}>
-                        <input
-                            type="text"
-                            name="message"
-                            placeholder="Hello..."
-                            value={currentMessage}
-                            onChange={(e) => onTextChange(e)}
-                        />
-                        <button type="submit">&#9658;</button>
-                    </form>
                 </div>
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        name="message"
+                        placeholder="Hello..."
+                        value={currentMessage}
+                        onChange={(e) => onTextChange(e)}
+                    />
+                    <button type="submit">&#9658;</button>
+                </form>
             </div>
         </div>
     );
