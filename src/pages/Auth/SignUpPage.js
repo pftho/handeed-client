@@ -40,10 +40,9 @@ function SignUpPage() {
     };
 
     return (
-        <div>
-            {' '}
+        <div className="form-container">
             <h1>Sign Up</h1>
-            <form onSubmit={handleSubmit}>
+            <form className="form" onSubmit={handleSubmit}>
                 <label>User Name</label>
                 <input
                     name="username"
@@ -76,7 +75,9 @@ function SignUpPage() {
                     onChange={handleChange}
                     value={formData.address}
                 />
-                <button type="submit">Sign Up</button>
+                <button className="form-btn" type="submit">
+                    Sign Up
+                </button>
                 {errorMessage && (
                     <p className="errorMessage"> {errorMessage} </p>
                 )}

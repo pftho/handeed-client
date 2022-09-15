@@ -40,9 +40,9 @@ function LoginPage() {
     };
 
     return (
-        <div>
+        <div className='form-container'>
             <h1>Log in</h1>
-            <form onSubmit={handleSubmit}>
+            <form className='form' onSubmit={handleSubmit}>
                 <label>Email</label>
                 <input
                     name="email"
