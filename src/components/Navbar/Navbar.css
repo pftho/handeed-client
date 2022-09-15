@@ -92,6 +92,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 2rem;
 }
 
 .nav-desktop {
@@ -108,17 +109,10 @@ header {
 }
 
 .logout-btn {
-    /* background: var(--dark-orange);
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: 5px;
-        font-family: 'quicksand';
-        font-size: 20px;
-        border: none; */
     padding: 1rem;
     border: none;
     border-radius: 3px;
-    align-self: center;
+    /* align-self: center; */
     width: 15%;
     font-size: 15px;
     font-family: 'quicksand', 'Roboto', sans-serif;
@@ -134,4 +128,8 @@ header {
 .logout-btn:hover {
     background: var(--dark-orange);
     font-family: 'quicksand', 'Roboto', sans-serif;
+}
+
+.nav-logged-out {
+    width: 40%;
 }

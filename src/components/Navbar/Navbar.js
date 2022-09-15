@@ -129,13 +129,9 @@ function Navbar() {
                             className="logo"
                         />
                     </Link>
-                    <nav>
-                        <Link to="/auth/signup">
-                            <button>Sign Up</button>
-                        </Link>
-                        <Link to="/auth/login">
-                            <button>Login</button>
-                        </Link>
+                    <nav className="nav-desktop nav-logged-out">
+                        <Link to="/auth/signup">Sign Up</Link>
+                        <Link to="/auth/login">Login</Link>
                     </nav>
                 </header>
             )}

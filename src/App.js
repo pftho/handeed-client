@@ -4,7 +4,7 @@ import Navbar from './components/Navbar/Navbar';
 import SignUpPage from './pages/Auth/SignUpPage';
 import LoginPage from './pages/Auth/LoginPage';
 import ProfilePage from './pages/Profile/ProfilePage';
-import LandingPage from './pages/LandingPage';
+import LandingPage from './pages/LandingPage/LandingPage';
 import AdDetailsPage from './pages/Ads/AdDetailsPage/AdDetailsPage';
 import CreateAd from './components/forms/CreateAd';
 import AdListPage from './pages/Ads/AdListPage/AdListPage';
