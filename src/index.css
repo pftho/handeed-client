@@ -3,6 +3,7 @@
     --dark-orange: #ea5c2b;
     --orange: #ff7f3f;
     --yellow: #f0b237;
+    --grey: #d0c9c0;
 }
 
 body {
@@ -10,6 +11,36 @@ body {
     font-family: 'quicksand', 'Roboto', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Abril Fatface', 'quicksand';
+    font-weight: light;
+    margin: 0.5rem 0;
+}
+h1 {
+    font-size: 36px;
+}
+h2 {
+    font-size: 28px;
+}
+h3 {
+    font-size: 20px;
+}
+p {
+    font-size: 18px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h4,
+h6 {
+    font-family: 'abril fatface', 'Roboto', sans-serif;
 }
 
 code {

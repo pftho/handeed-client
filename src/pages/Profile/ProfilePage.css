@@ -1,31 +1,103 @@
-.user-profile {
+.user-profile-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: 50%;
-    gap: 1rem;
-    padding: 5rem;
+    align-items: center;
+    justify-content: center;
+    border: black 1px solid;
 }
 
-.profile-picture {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
+.user-profile-container h1 {
+    font-size: 48px;
+    color: var(--dark);
+}
+
+.user-profile-container h2,
+h3,
+p {
+    color: var(--dark);
+}
+
+p {
+    font-weight: 700;
+}
+
+.user-profile {
+    padding: 2rem 1rem 4rem 1rem;
 }
 
 .user-info {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    background-color: lightgray;
-    width: 100%;
-    padding: 1rem;
+    gap: 1rem;
+    align-items: center;
 }
 
-.user-info label,
-.profile-picture label {
-    font-size: 1.5rem;
+.user-profile .profile-picture {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: solid 1px var(--grey);
+    padding-bottom: 2rem;
+}
+
+.user-profile .profile-picture img {
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+}
+
+.user-profile form {
+    display: flex;
+}
+
+.user-profile form button {
+    padding: 1rem;
+    border: none;
+    border-radius: 3px;
+    align-self: center;
+    font-size: 15px;
+    font-family: 'quicksand', 'Roboto', sans-serif;
+    box-shadow: 10px 10px 0px var(--dark);
+    background: linear-gradient(
+        to bottom right,
+        var(--orange),
+        var(--dark-orange)
+    );
+    color: white;
+}
+
+.user-profile form button:hover {
+    background: var(--dark-orange);
+    font-family: 'quicksand', 'Roboto', sans-serif;
+}
+
+.user-profile .info-div {
+    padding-top: 1rem;
+}
+
+@media only screen and (min-width: 1200px) {
+    .user-profile {
+        padding: 2rem 1rem 4rem 1rem;
+        display: flex;
+        width: 80%;
+    }
+
+    .user-profile .profile-picture {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 1rem;
+        border: 1px solid var(--grey);
+        margin-right: 3rem;
+        padding: 3rem;
+        border-radius: 7px;
+    }
+
+    .user-profile .profile-picture img {
+        border-radius: 50%;
+        height: 200px;
+        width: 200px;
+    }
 }

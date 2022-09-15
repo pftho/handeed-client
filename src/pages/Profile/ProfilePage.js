@@ -39,35 +39,34 @@ function ProfilePage() {
     };
 
     return (
-        <div className="user-profile">
-            <h1>Your profile page</h1>
-            <div className="profile-picture">
-                <label>Profile picture</label>
-                <img
-                    src={localImageUrl || user.imageUrl}
-                    alt="profile"
-                    width={100}
-                />
-                <form onSubmit={handleSubmit}>
-                    <input type="file" onChange={handleFileUpload} />
-                    <button type="submit" disabled={!localImageUrl}>
-                        Update
-                    </button>
-                </form>
-            </div>
+        <div className="user-profile-container">
+            <div className="user-profile">
+                <div className="profile-picture">
+                    <h2>{user.username}</h2>
+                    <img src={localImageUrl || user.imageUrl} alt="profile" />
+                    <form onSubmit={handleSubmit}>
+                        <input type="file" onChange={handleFileUpload} />
+                        <button type="submit" disabled={!localImageUrl}>
+                            Update
+                        </button>
+                    </form>
+                </div>
+                <div className="info-div">
+                    <h2>My information</h2>
+                    <div className="user-info">
+                        <h3>User Name</h3>
+                        <p>{user.username}</p>
+                    </div>
 
-            <div className="user-info">
-                <label>User Name</label>
-                <p>{user.username}</p>
-            </div>
-
-            <div className="user-info">
-                <label>Email</label>
-                <p>{user.email}</p>
-            </div>
-            <div className="user-info">
-                <label>Home adress</label>
-                <p>{user.address}</p>
+                    <div className="user-info">
+                        <h3>Email</h3>
+                        <p>{user.email}</p>
+                    </div>
+                    <div className="user-info">
+                        <h3>Home adress</h3>
+                        <p>{user.address}</p>
+                    </div>
+                </div>
             </div>
         </div>
     );
