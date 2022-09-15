@@ -27,7 +27,7 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    width: 30%;
+    width: 40%;
     padding: 1rem 2rem;
     background-color: var(--yellow);
     border-radius: 7px;
@@ -40,6 +40,7 @@
 
 .form-container button:hover {
     color: white;
+    font-family: 'quicksand', 'Roboto', sans-serif;
 }
 
 .form-container button {
@@ -50,8 +51,32 @@
     align-self: center;
     width: 70%;
     font-size: 15px;
+    font-family: 'quicksand', 'Roboto', sans-serif;
 }
 
-/* @media only screen and (min-width: 992px) {...}
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-/* @media only screen and (min-width: 1200px) {...}  */
+form label {
+    margin: 0.3rem 0;
+}
+
+form input {
+    box-sizing: border-box;
+    font-size: 14px;
+    outline: 0;
+    padding: 0.5rem;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.other-auth-link {
+    color: var(--orange);
+}
+
+.other-auth-link:hover {
+    color: var(--dark-orange);
+}
+
+@media only screen and (min-width: 1200px) {
+    .form-container .form {
+        width: 30%;
+    }
+}

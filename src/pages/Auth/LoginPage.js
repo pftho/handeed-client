@@ -66,8 +66,11 @@ function LoginPage() {
                     <p className="errorMessage"> {errorMessage} </p>
                 )}
             </form>
-            <p className="other-auth">
-                Not a member? <Link to="/auth/signup">Signup</Link>
+            <p>
+                Not a member?{' '}
+                <Link className="other-auth-link" to="/auth/signup">
+                    Signup
+                </Link>
             </p>
         </div>
     );

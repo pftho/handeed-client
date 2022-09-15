@@ -86,8 +86,11 @@ function SignUpPage() {
                     <p className="errorMessage"> {errorMessage} </p>
                 )}
             </form>
-            <p className="other-auth">
-                Already have an account? <Link to="/auth/login">Login</Link>
+            <p>
+                Already have an account?{' '}
+                <Link className="other-auth-link" to="/auth/login">
+                    Login
+                </Link>
             </p>
         </div>
     );
