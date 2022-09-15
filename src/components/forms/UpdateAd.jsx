@@ -28,7 +28,7 @@ function UpdateAd() {
         const API_URL =
             process.env.REACT_APP_API_URL || 'http://localhost:5005';
 
-        const response = await axios.get(`${API_URL}/ads/${adId}`, {
+        const response = await axios.get(`${API_URL}/api/ads/${adId}`, {
             headers: { Authorization: `Bearer ${getToken()}` },
         });
         setAdToUpdate(response.data);
@@ -64,7 +64,7 @@ function UpdateAd() {
         uploadData.append('image', e.target.files[0]);
 
         axios
-            .post(`${API_URL}/ads/upload`, uploadData, {
+            .post(`${API_URL}/api/ads/upload`, uploadData, {
                 headers: { Authorization: `Bearer ${getToken()}` },
             })
             .then((response) => {
@@ -79,7 +79,7 @@ function UpdateAd() {
         try {
             e.preventDefault();
             await axios.put(
-                `${API_URL}/ads/${adId}/edit`,
+                `${API_URL}/api/ads/${adId}/edit`,
                 { ...adToUpdate, image },
                 { headers: { Authorization: `Bearer ${getToken()}` } }
             );

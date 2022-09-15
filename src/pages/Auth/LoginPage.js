@@ -26,7 +26,7 @@ function LoginPage() {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios
-            .post(`${API_URL}/auth/login`, formData)
+            .post(`${API_URL}/api/auth/login`, formData)
             .then((response) => {
                 storeToken(response.data.authToken);
                 authenticateUser();

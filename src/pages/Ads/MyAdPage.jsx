@@ -12,12 +12,12 @@ function MyAdPage() {
     }
 
     const handleCredit = async (_id) => {
-        await axios.delete(`${API_URL}/ads/${_id}`, {
+        await axios.delete(`${API_URL}/api/ads/${_id}`, {
             headers: { Authorization: `Bearer ${getToken()}` },
         });
 
         await axios.put(
-            `${API_URL}/profile/user/${user.id}`,
+            `${API_URL}/api/profile/user/${user.id}`,
             { credits: user.credits + 1 },
             {
                 headers: { Authorization: `Bearer ${getToken()}` },
@@ -25,7 +25,7 @@ function MyAdPage() {
         );
 
         const updatedUser = await axios.get(
-            `${API_URL}/profile/user/${user.id}`,
+            `${API_URL}/api/profile/user/${user.id}`,
             {
                 headers: { Authorization: `Bearer ${getToken()}` },
             }

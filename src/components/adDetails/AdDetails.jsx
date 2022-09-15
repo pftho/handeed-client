@@ -67,7 +67,7 @@ function AdDetails({
 
         if (answer) {
             await axios.post(
-                `${API_URL}/chat/contact`,
+                `${API_URL}/api/chat/contact`,
                 {
                     chatname: title,
                     sender: user.id,
@@ -81,7 +81,7 @@ function AdDetails({
             );
 
             await axios.put(
-                `${API_URL}/profile/user/${user.id}`,
+                `${API_URL}/api/profile/user/${user.id}`,
                 { credits: user.credits - 1 },
                 {
                     headers: { Authorization: `Bearer ${getToken()}` },

@@ -29,7 +29,7 @@ function SignUpPage() {
         e.preventDefault();
 
         axios
-            .post(`${API_URL}/auth/signup`, formData)
+            .post(`${API_URL}/api/auth/signup`, formData)
             .then((response) => {
                 navigate('/auth/login');
             })
