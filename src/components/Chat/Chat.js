@@ -1,11 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import io from 'socket.io-client';
 import { AuthContext } from '../../context/auth.context';
 import './Chat.css';
 const socket = io.connect(process.env.REACT_APP_WS_URL);
 
-function Chat({ username, room, chat }) {
+const formatter = new Intl.RelativeTimeFormat('en', { style: 'narrow' });
+
+const DIVISIONS = [
+    { amount: 60, name: 'seconds' },
+    { amount: 60, name: 'minutes' },
+    { amount: 24, name: 'hours' },
+    { amount: 7, name: 'days' },
+    { amount: 4.34524, name: 'weeks' },
+    { amount: 12, name: 'months' },
+    { amount: Number.POSITIVE_INFINITY, name: 'years' },
+];
+
+function formatTimeAgo(date) {
+    let duration = (date - new Date()) / 1000;
+
+    for (let i = 0; i <= DIVISIONS.length; i++) {
+        const division = DIVISIONS[i];
+        if (Math.abs(duration) < division.amount) {
+            return formatter.format(Math.round(duration), division.name);
+        }
+        duration /= division.amount;
+    }
+}
+
+function Chat({ username, chat }) {
     const [currentMessage, setCurrentMessage] = useState('');
     const [messages, setMessages] = useState([]);
     const { user } = React.useContext(AuthContext);
@@ -15,7 +38,8 @@ function Chat({ username, room, chat }) {
 
     useEffect(() => {
         //send information to back
-        socket.emit('join_room', room);
+        console.log('JOIN', chat._id);
+        socket.emit('join_room', chat._id);
 
         //listen from back for "sync_messages" event
         socket.on('receive_message', (data) => {
@@ -46,9 +70,13 @@ function Chat({ username, room, chat }) {
             }; // to push in the message list
 
             await socket.emit('send_message', messageData);
-            setMessages((messages) => [...messages, messageData]);
+
+            // setMessages((messages) => [...messages, messageData]);
+            setCurrentMessage('');
         }
     };
+
+    // console.table(chat.messages);
 
     return (
         <div>
@@ -63,17 +91,22 @@ function Chat({ username, room, chat }) {
                             {messages.map((message) => {
                                 return (
                                     <div
-                                        key={uuidv4()}
+                                        key={message._id}
                                         className="message-content"
                                     >
                                         <div>
-                                            <p>{message.message}</p>
+                                            <p>
+                                                {message._id} :{' '}
+                                                {message.message}
+                                            </p>
                                         </div>
                                         <div className="message-info">
                                             <p id="time">
-                                                {message.time.toString()}
+                                                {formatTimeAgo(
+                                                    new Date(message.time)
+                                                )}
                                             </p>
-                                            <p id="author">{message.author}</p>
+                                            <p id="author">{message.sender}</p>
                                         </div>
                                     </div>
                                 );
@@ -86,6 +119,7 @@ function Chat({ username, room, chat }) {
                             type="text"
                             name="message"
                             placeholder="Hello..."
+                            value={currentMessage}
                             onChange={(e) => onTextChange(e)}
                         />
                         <button type="submit">&#9658;</button>
