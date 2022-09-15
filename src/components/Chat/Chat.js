@@ -33,6 +33,7 @@ function Chat({ username, room, chat }) {
             socket.off('receive_message');
             socket.off('disconnect');
         };
+        // eslint-disable-next-line
     }, []);
 
     const handleSubmit = async (e) => {
