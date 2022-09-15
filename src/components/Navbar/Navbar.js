@@ -6,7 +6,7 @@ import Credits from '../Credits/Credits';
 import './Navbar.css';
 
 function Navbar() {
-    const { isLoggedIn, user, logOutUser, isLoading } = useContext(AuthContext);
+    const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
 
     return (
         <nav className="nav">
