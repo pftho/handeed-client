@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../../context/auth.context';
 import './AuthForm.css';
 
@@ -40,9 +40,9 @@ function LoginPage() {
     };
 
     return (
-        <div>
+        <div className="form-container">
             <h1>Log in</h1>
-            <form onSubmit={handleSubmit}>
+            <form className="form" onSubmit={handleSubmit}>
                 <label>Email</label>
                 <input
                     name="email"
@@ -50,6 +50,7 @@ function LoginPage() {
                     required
                     onChange={handleChange}
                     value={formData.email}
+                    placeholder="ironhacker@gmail.com"
                 />
                 <label>Password</label>
                 <input
@@ -58,12 +59,21 @@ function LoginPage() {
                     type="password"
                     onChange={handleChange}
                     value={formData.password}
+                    placeholder="********"
                 />
-                <button type="submit">Log in</button>
+                <button className="form-btn" type="submit">
+                    Log in
+                </button>
                 {errorMessage && (
                     <p className="errorMessage"> {errorMessage} </p>
                 )}
             </form>
+            <p>
+                Not a member?{' '}
+                <Link className="other-auth-link" to="/auth/signup">
+                    Signup
+                </Link>
+            </p>
         </div>
     );
 }

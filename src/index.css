@@ -1,16 +1,16 @@
 :root {
-  --dark: #2A283C;
-  --dark-orange: #EA5C2B;
-  --orange: #FF7F3F;
-  --yellow: #F0B237;
-  --grey: #d0c9c0;
+    --dark: #2a283c;
+    --dark-orange: #ea5c2b;
+    --orange: #ff7f3f;
+    --yellow: #f0b237;
+    --grey: #d0c9c0;
 }
 
 body {
-  display: flex;
-   flex-direction: column;
-   min-height: 100vh;
-   margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0 auto;
     margin: 0;
     font-family: 'quicksand', 'Roboto', sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -23,40 +23,42 @@ code {
         monospace;
 }
 
-h1, h2,h3,h4 {
-  font-family: 'Abril Fatface', 'quicksand';
-  font-weight: light;
-  margin: 0.5rem 0;
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Abril Fatface', 'quicksand';
+    font-weight: light;
+    margin: 0.5rem 0;
 }
 
 h1 {
-  font-size: 36px;
+    font-size: 36px;
 }
 
 h2 {
-  font-size: 28px;
+    font-size: 28px;
 }
 
 h3 {
-  font-size: 20px;
+    font-size: 20px;
 }
 
 p {
-  font-size: 18px;
+    font-size: 18px;
 }
 
 .app-wrapper {
-  margin: 0 auto;
-  max-width: 1400px;
+    margin: 0 auto;
+    max-width: 1400px;
 }
 
 .wrapper {
-  margin: 0 1rem;
-  
+    margin: 0 1rem;
 }
 
 @media screen and (min-width: 1200px) {
-  .wrapper {
-    margin: 0 3rem;
-  }
+    .wrapper {
+        margin: 0 3rem;
+    }
 }
