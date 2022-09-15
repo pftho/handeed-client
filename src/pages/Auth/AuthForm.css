@@ -14,7 +14,7 @@
     right: 0;
     z-index: -1;
     display: block;
-    /* background-image: url('../images/bg-form-img.jpg'); */
+    background-image: url('../../assets/bg-auth.jpg');
     background-size: cover;
     width: 100%;
     height: 100%;
@@ -28,23 +28,22 @@
     align-items: center;
     gap: 1rem;
     width: 40%;
-    padding: 1rem 2rem;
-    background-color: var(--yellow);
+    padding: 2rem 2rem 4rem 2rem;
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 7px;
 }
 
 .form-container h1 {
     font-size: 48px;
-    color: var(--dark);
+    color: white;
 }
 
 .form-container button:hover {
-    color: white;
+    background: var(--dark-orange);
     font-family: 'quicksand', 'Roboto', sans-serif;
 }
 
 .form-container button {
-    background-color: var(--dark-orange);
     padding: 1rem;
     border: none;
     border-radius: 3px;
@@ -52,6 +51,13 @@
     width: 70%;
     font-size: 15px;
     font-family: 'quicksand', 'Roboto', sans-serif;
+    box-shadow: 10px 10px 0px var(--dark);
+    background: linear-gradient(
+        to bottom right,
+        var(--orange),
+        var(--dark-orange)
+    );
+    color: white;
 }
 
 form label {
@@ -73,6 +79,10 @@ form input {
 
 .other-auth-link:hover {
     color: var(--dark-orange);
+}
+
+p {
+    color: white;
 }
 
 @media only screen and (min-width: 1200px) {

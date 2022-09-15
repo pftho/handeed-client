@@ -18,6 +18,36 @@ body {
     color: var(--dark);
 }
 
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Abril Fatface', 'quicksand';
+    font-weight: light;
+    margin: 0.5rem 0;
+}
+h1 {
+    font-size: 36px;
+}
+h2 {
+    font-size: 28px;
+}
+h3 {
+    font-size: 20px;
+}
+p {
+    font-size: 18px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h4,
+h6 {
+    font-family: 'abril fatface', 'Roboto', sans-serif;
+}
+
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
         monospace;
