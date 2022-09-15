@@ -33,7 +33,7 @@ function Chat({ username, room, chat }) {
             socket.off('receive_message');
             socket.off('disconnect');
         };
-    }, []);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const handleSubmit = async (e) => {
         e.preventDefault();

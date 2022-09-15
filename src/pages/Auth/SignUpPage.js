@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AuthForm.css';
 
-const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5005';
 
 function SignUpPage() {
     //States
@@ -29,7 +29,7 @@ function SignUpPage() {
         e.preventDefault();
 
         axios
-            .post(`${API_URL}/auth/signup`, formData)
+            .post(`${API_URL}/api/auth/signup`, formData)
             .then((response) => {
                 navigate('/auth/login');
             })

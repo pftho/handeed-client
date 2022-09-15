@@ -36,14 +36,14 @@ function CreateAd() {
         });
     };
 
-    const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5005';
 
     const handleFileUpload = (e) => {
         const uploadData = new FormData();
         uploadData.append('image', e.target.files[0]);
 
         axios
-            .post(`${API_URL}/ads/upload`, uploadData, {
+            .post(`${API_URL}/api/ads/upload`, uploadData, {
                 headers: { Authorization: `Bearer ${getToken()}` },
             })
             .then((response) => {
@@ -58,14 +58,14 @@ function CreateAd() {
         try {
             e.preventDefault();
             const response = await axios.post(
-                `${API_URL}/ads`,
+                `${API_URL}/api/ads`,
                 { ...newAd, image },
                 { headers: { Authorization: `Bearer ${getToken()}` } }
             );
             user.ads.push(response.data._id);
 
             const updatedUser = await axios.get(
-                `${API_URL}/profile/user/${user.id}`,
+                `${API_URL}/api/profile/user/${user.id}`,
                 {
                     headers: { Authorization: `Bearer ${getToken()}` },
                 }

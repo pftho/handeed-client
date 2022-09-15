@@ -5,7 +5,7 @@ import Chat from '../Chat/Chat';
 import { AuthContext } from '../../context/auth.context';
 import axios from 'axios';
 import './AdDetails.css';
-const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5005';
 
 function AdDetails({
     _id,
@@ -67,7 +67,7 @@ function AdDetails({
 
         if (answer) {
             await axios.post(
-                `${API_URL}/chat/contact`,
+                `${API_URL}/api/chat/contact`,
                 {
                     chatname: title,
                     sender: user.id,
@@ -81,7 +81,7 @@ function AdDetails({
             );
 
             await axios.put(
-                `${API_URL}/profile/user/${user.id}`,
+                `${API_URL}/api/profile/user/${user.id}`,
                 { credits: user.credits - 1 },
                 {
                     headers: { Authorization: `Bearer ${getToken()}` },

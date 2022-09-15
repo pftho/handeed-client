@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/auth.context';
 import './AuthForm.css';
 
-const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5005';
 
 function LoginPage() {
     const [formData, setFormData] = useState({
@@ -26,7 +26,7 @@ function LoginPage() {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios
-            .post(`${API_URL}/auth/login`, formData)
+            .post(`${API_URL}/api/auth/login`, formData)
             .then((response) => {
                 storeToken(response.data.authToken);
                 authenticateUser();

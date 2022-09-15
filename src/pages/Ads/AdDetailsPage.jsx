@@ -5,13 +5,14 @@ import AdDetails from '../../components/adDetails/AdDetails';
 import { AuthContext } from '../../context/auth.context';
 import './AdDetailsPage.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5005';
+
 function AdDetailsPage() {
     const [ad, setAd] = useState({});
     const [chats, setChats] = useState({});
     const { adId } = useParams();
     const { getToken } = useContext(AuthContext);
     const navigate = useNavigate();
-    const API_URL = `${process.env.REACT_APP_API_URL}/api`;
 
     const getAd = async (url) => {
         const storedToken = localStorage.getItem('authToken');
@@ -22,7 +23,7 @@ function AdDetailsPage() {
     };
 
     const getChats = async () => {
-        const url = `${API_URL}/chat/${adId}`;
+        const url = `${API_URL}/api/chat/${adId}`;
         const storedToken = localStorage.getItem('authToken');
         const response = await axios.get(url, {
             headers: { Authorization: `Bearer ${storedToken}` },
@@ -32,7 +33,7 @@ function AdDetailsPage() {
 
     useEffect(() => {
         try {
-            getAd(`${API_URL}/ads/${adId}`);
+            getAd(`${API_URL}/api/ads/${adId}`);
         } catch (error) {
             console.log(error);
         }
@@ -48,7 +49,7 @@ function AdDetailsPage() {
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`${API_URL}/ads/${adId}`, {
+            await axios.delete(`${API_URL}/api/ads/${adId}`, {
                 headers: { Authorization: `Bearer ${getToken()}` },
             });
             navigate('/ads');
