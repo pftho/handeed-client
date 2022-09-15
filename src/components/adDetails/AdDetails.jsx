@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import Chat from '../Chat/Chat';
@@ -22,12 +22,18 @@ function AdDetails({
     onChatOpen,
     chats,
 }) {
-    const { isOwner, checkIfOwner, isLoggedIn } = useContext(AuthContext);
-    const { adId } = useParams();
-    checkIfOwner(adId);
+   
+    const { isOwner, checkIfOwner, user, setUser, getToken, isLoggedIn } = useContext(AuthContext);
+    const {adId} = useParams()
+    
+    const [isChatVisible, setIsChatVisible] = React.useState(false);
 
+    useEffect(() => {
+        checkIfOwner(adId)
+    }, [adId, checkIfOwner])
+  
     let map;
-    if (owner !== undefined) {
+    if (owner !== undefined && owner.location !== undefined) {
         const latlng = [
             owner.location.coordinates[1],
             owner.location.coordinates[0],
@@ -52,13 +58,10 @@ function AdDetails({
         );
     }
 
-    const { user, setUser, getToken } = useContext(AuthContext);
-    const [isChatVisible, setIsChatVisible] = React.useState(false);
-
     const handleRoomCreation = async () => {
         if (user.credits < 1) {
             window.alert(
-                'You are out of hangers, make a donation to earn more'
+                'You are out of dresses, make a donation to earn more'
             );
             return;
         }

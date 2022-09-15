@@ -1,0 +1,83 @@
+.select-radio {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 1rem;
+}
+
+.filters input[type='radio'] {
+    margin: 0.5rem;
+}
+
+.filters-address {
+    width: 50%;
+}
+
+.filters-address-btn {
+    background-color: var(--dark-orange);
+}
+
+.filters-address h3 {
+    margin: 0.5rem 0;
+}
+
+.filters-category {
+    width: 100%;
+    margin: 1rem;
+}
+
+.filters-category select {
+    padding: 0.5rem;
+    border-radius: 3px;
+    border: 1px solid var(--grey);
+}
+
+.filters-condition,
+.filters-size {
+    margin: 1rem;
+}
+
+.filters-size {
+    margin-right: 3rem;
+}
+
+input[type='radio']:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: white;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 1px solid var(--grey);
+}
+
+input[type='radio']:checked:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: var(--dark-orange);
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 1px solid var(--yellow);
+}
+
+@media screen and (min-width: 1200px) {
+    .filters-wrapper {
+        margin: 1rem 0;
+    }
+    .filters-address {
+        width: 100%;
+    }
+
+    .select-radio {
+        display: flex;
+        flex-direction: column;
+    }
+}

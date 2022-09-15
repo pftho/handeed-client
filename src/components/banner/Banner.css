@@ -1,0 +1,46 @@
+.banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: var(--orange);
+    color: white;
+    padding: 0.5rem 1rem;
+}
+
+.banner .logo {
+    /* width: 10%;
+    object-fit: contain; */
+    display: none;
+}
+
+.banner p {
+    line-height: 1.5;
+    width: 60%;
+}
+
+.hands {
+    width: 40%;
+}
+
+@media screen and (min-width: 1200px) {
+    .banner {
+        justify-content: center;
+    }
+
+    .banner .logo {
+        width: 300px;
+        /* object-fit: contain; */
+        display: block;
+    }
+
+    .banner p {
+        line-height: 1.5;
+        width: 30%;
+        margin-left: 2rem;
+        font-size: 24px;
+    }
+
+    .hands {
+        width: 200px;
+    }
+}

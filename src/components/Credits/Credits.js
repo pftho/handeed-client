@@ -1,13 +1,14 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../context/auth.context';
+import dress from '../../assets/dress.png'
 import './Credits.css';
 
 function Credits() {
     const { user } = useContext(AuthContext);
     return (
         <div className="credits">
-            <img src={require('./hanger.png')} alt="hanger" width={30} />
-            <p>{user.credits}</p>
+            <img src={dress} alt="credits" className='dress-icon' />
+            <p className='credit-number'>{user.credits}</p>
         </div>
     );
 }

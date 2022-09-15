@@ -1,0 +1,39 @@
+.search-bar {
+    margin: 1rem;
+}
+
+.search-bar form {
+    border: 1px solid #d0c9c0;
+    border-radius: 40px;
+    padding-left: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-bar input {
+    border: none;
+    width: 100%;
+}
+
+.search-bar input:focus{
+    outline: none;
+}
+
+.search-btn {
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--yellow);
+    border-radius: 50px;
+    color: white;
+    padding: 0;
+    padding: 1rem;
+}
+
+@media screen and (min-width: 1200px) {
+    .global-search {
+        margin: 2rem 1rem;
+        width:40%;
+    }
+}

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import AdDetails from '../../components/adDetails/AdDetails';
-import { AuthContext } from '../../context/auth.context';
+import AdDetails from '../../../components/adDetails/AdDetails';
+import { AuthContext } from '../../../context/auth.context';
 import './AdDetailsPage.css';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5005';

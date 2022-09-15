@@ -66,7 +66,7 @@ function ProfilePage() {
                 <p>{user.email}</p>
             </div>
             <div className="user-info">
-                <label>Home adress</label>
+                <label>Home address</label>
                 <p>{user.address}</p>
             </div>
         </div>
