@@ -5,7 +5,7 @@ import Chat from '../Chat/Chat';
 import { AuthContext } from '../../context/auth.context';
 import axios from 'axios';
 import './AdDetails.css';
-const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5005';
 
 function AdDetails({
     _id,

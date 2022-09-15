@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/auth.context';
 import './ProfilePage.css';
-const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5005';
 
 function ProfilePage() {
     const [localImageUrl, setImageUrl] = useState('');

@@ -11,7 +11,7 @@ function AdDetailsPage() {
     const { adId } = useParams();
     const { getToken } = useContext(AuthContext);
     const navigate = useNavigate();
-    const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5005';
 
     const getAd = async (url) => {
         const storedToken = localStorage.getItem('authToken');

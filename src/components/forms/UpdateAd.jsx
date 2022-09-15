@@ -25,7 +25,9 @@ function UpdateAd() {
     const navigate = useNavigate();
 
     const getAdToUpdate = async () => {
-        const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+        const API_URL =
+            process.env.REACT_APP_API_URL || 'http://localhost:5005';
+
         const response = await axios.get(`${API_URL}/ads/${adId}`, {
             headers: { Authorization: `Bearer ${getToken()}` },
         });
@@ -55,7 +57,7 @@ function UpdateAd() {
         });
     };
 
-    const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5005';
 
     const handleFileUpload = (e) => {
         const uploadData = new FormData();

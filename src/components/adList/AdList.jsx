@@ -10,7 +10,9 @@ function AdList() {
     const [ads, setAds] = useState([]);
 
     const getAds = async () => {
-        const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+        const API_URL =
+            process.env.REACT_APP_API_URL || 'http://localhost:5005';
+
         const storedToken = localStorage.getItem('authToken');
         const response = await axios.get(`${API_URL}/ads`, {
             headers: { Authorization: `Bearer ${storedToken}` },
