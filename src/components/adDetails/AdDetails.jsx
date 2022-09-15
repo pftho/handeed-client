@@ -125,13 +125,12 @@ function AdDetails({
                     return (
                         <Chat
                             key={chat._id}
-                            room={chat._id}
                             chat={chat}
                             username={user.username}
                         />
                     );
                 })
-            ) : (
+            ) : isOwner ? null : (
                 <button onClick={handleRoomCreation}>Chat with owner</button>
             )}
         </div>
