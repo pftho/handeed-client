@@ -40,7 +40,7 @@ function SignUpPage() {
     };
 
     return (
-        <div className="form-container">
+        <div className="form-container login-form">
             {' '}
             <h1>Sign Up</h1>
             <form className="form" onSubmit={handleSubmit}>

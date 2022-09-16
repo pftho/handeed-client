@@ -60,6 +60,11 @@
        z-index: 5;
     }
 
+    /* .landing-page {
+        margin-top: 10rem;
+
+    } */
+
     .landing-hero-wrapper {
         display: flex;
         align-items: center;

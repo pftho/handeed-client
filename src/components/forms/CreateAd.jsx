@@ -78,7 +78,7 @@ function CreateAd() {
     };
 
     return (
-        <div className="form-container">
+        <div className="form-container create-form">
             <form className="new-ad-form" onSubmit={handleSubmit}>
                 <label htmlFor="title">Title</label>
                 <input
@@ -99,7 +99,7 @@ function CreateAd() {
                     name="description"
                     value={newAd.description}
                     onChange={handleChange}
-                    placeholder="E.g. Black dress, to collect between 2pm and 4pm. Give as many details as possible (on the color, size etc.) to increase your chances of giving your clothe"
+                    placeholder="E.g. Black dress, to collect between 2pm and 4pm. Give as many details as possible (on the color, size etc.) to increase your chances of giving your item"
                 />
 
                 <label htmlFor="brand">Brand</label>

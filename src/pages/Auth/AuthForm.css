@@ -3,8 +3,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 95vh;
-    gap: 1rem;
+    /* height: 100vh; */
+    /* gap: 1rem; */
 }
 
 .form-container::before {
@@ -73,11 +73,14 @@ form select {
     padding: 0.5rem;
     width: 100%;
     margin-bottom: 20px;
+    border-radius: 3px;
+    border: 1px solid var(--grey)
 }
 
 .file-input-btn {
     display: flex;
     flex-direction: column;
+    
 }
 
 .other-auth-link {

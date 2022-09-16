@@ -113,7 +113,7 @@ function Chat({ username, chat }) {
                         </div>
                     </div>
                 </div>
-                <form onSubmit={handleSubmit}>
+                <form className='chat-form' onSubmit={handleSubmit}>
                     <input
                         type="text"
                         name="message"
@@ -121,7 +121,7 @@ function Chat({ username, chat }) {
                         value={currentMessage}
                         onChange={(e) => onTextChange(e)}
                     />
-                    <button type="submit">&#9658;</button>
+                    <button className='send-message' type="submit"><i class="fa-regular fa-paper-plane fa-lg"></i></button>
                 </form>
             </div>
         </div>

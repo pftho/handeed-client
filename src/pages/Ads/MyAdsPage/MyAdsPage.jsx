@@ -47,7 +47,7 @@ function MyAdPage() {
                             <div key={ad._id} className='my-ad-card'>
                                 <AdCard {...ad} />
                                 <button
-                                    className="confirm-button"
+                                    className="confirm-button yellow-button"
                                     onClick={() => handleCredit(ad._id)}
                                 >
                                     Confirm donation

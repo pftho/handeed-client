@@ -90,7 +90,7 @@ function UpdateAd() {
     };
 
     return (
-        <div className="form-container">
+        <div className="form-container create-form">
             <form className="new-ad-form" onSubmit={handleSubmit}>
                 <label htmlFor="title">Title</label>
                 <input

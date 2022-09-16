@@ -145,7 +145,7 @@ function AdDetails({
                     );
                 })
             ) : isOwner ? null : (
-                <button className="contact-btn" onClick={handleRoomCreation}>
+                <button className="button" onClick={handleRoomCreation}>
                     Chat with owner
                 </button>
             )}

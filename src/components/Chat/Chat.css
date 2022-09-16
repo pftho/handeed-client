@@ -10,7 +10,7 @@ form button:hover {
     font-family: 'quicksand', 'Roboto', sans-serif;
 }
 
-form button {
+/* form button {
     padding: 1rem;
     border: none;
     border-radius: 3px;
@@ -26,6 +26,23 @@ form button {
     );
     color: white;
     margin-left: 2rem;
+} */
+
+.chat-form input {
+    width: 80%;
+}
+
+.chat-form  {
+    width: 100%;
+}
+
+.send-message {
+    border: none;
+    background-color: var(--dark-orange);
+    color: white;
+    padding: 1rem;
+    margin: 0 1rem;
+    border-radius: 50%;
 }
 
 .chat-render {
@@ -73,3 +90,4 @@ form input {
     flex-direction: column;
     margin: 0 2rem 0 2rem;
 }
+

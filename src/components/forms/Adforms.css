@@ -4,20 +4,20 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 .form-container::before {
     content: '';
     position: fixed;
     left: 0;
-    right: 0;
+    top: 0;
     z-index: -1;
     display: block;
     background-image: url('../../assets/bg-profile-page.jpg');
     background-size: cover;
     width: 100%;
-
+    height: 100%;
     filter: brightness(50%);
 }
 
@@ -32,6 +32,16 @@
     width: 20%;
     border-radius: 7px;
     background-color: rgba(255, 255, 255, 0.7);
+    margin: 5rem 0 5rem 0;
+}
+
+.create-form {
+    margin: 2rem 0;
+
+}
+
+.file-input-btn {
+    border: none;
 }
 
 input::file-selector-button {
@@ -61,6 +71,8 @@ input::file-selector-button {
     touch-action: manipulation;
     vertical-align: baseline;
     width: auto;
+    border: none;
+
 }
 
 input::file-selector-button:hover,
@@ -95,11 +107,31 @@ input::file-selector-button:active {
     font-family: 'quicksand', 'Roboto', sans-serif;
 }
 
-.new-ad-form label {
+.login-form input {
+    width: 100%;
+}
+
+/* .create-form {
+    margin-top: 7rem;
+} */
+
+.new-ad-form label, 
+.login-form label {
     margin: 0.3rem 0;
     font-weight: 700;
     font-size: 28px;
     font-family: 'Abril Fatface', 'quicksand';
+}
+
+.login-form h1 {
+    margin: 2rem 0;
+
+}
+
+.login-form p {
+   color: white;
+    margin: 1rem 0;
+    font-size: 20px;
 }
 
 .new-ad-form input,
