@@ -17,7 +17,7 @@ function LandingPage() {
         {
             step: '2. List your items',
             description:
-                "Find out what you can give on Handeed. Add a few nice, clear picture of the item. Be specific and honest in the item's description. The nice thing is that for each item given, you'll receive 2 Dresses.",
+                "Find out what you can give on Handeed. Add a few nice, clear picture of the item. Be specific and honest in the item's description. The nice thing is that for each item given, you'll receive 1 Dress.",
                 img: list
             },
         {
@@ -43,12 +43,13 @@ function LandingPage() {
                 </div>
             </div>
             <div className="getting-started">
+                <div className="getting-started-text">
                 <h2>Getting started</h2>
                 <p>
                     To have a safe and successful selling experience on Handeed,
                     nothing more simple - simply follow these tips:
                 </p>
-
+                </div>
                 <div className="landing-cards">
                     {gettingStarted.map(({ step, description, img }) => (
                         <LandingCard step={step} description={description} img={img} />

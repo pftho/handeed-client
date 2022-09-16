@@ -63,10 +63,6 @@ footer h3 {
     font-weight: 600;
 }
 
-/* .networks-pauline span {
-    margin-right: 0.5rem;
-  } */
-
 @media screen and (min-width: 1200px) {
     footer {
         justify-content: space-between;

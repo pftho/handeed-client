@@ -92,7 +92,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 2rem;
+    /* margin-bottom: 2rem; */
 }
 
 .nav-desktop {
@@ -132,4 +132,10 @@ header {
 
 .nav-logged-out {
     width: 40%;
+    justify-content: flex-end;
+}
+
+.nav-logged-out a {
+    margin-right: 1rem;
+   
 }

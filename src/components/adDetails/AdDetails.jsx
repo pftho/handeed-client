@@ -16,7 +16,6 @@ function AdDetails({
     size,
     category,
     condition,
-    city,
     owner,
     handleDelete,
     onChatOpen,
@@ -44,6 +43,7 @@ function AdDetails({
                 zoom={13}
                 scrollWheelZoom={false}
                 style={{ height: '500px', width: '1000px' }}
+                className="map"
             >
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -98,14 +98,28 @@ function AdDetails({
 
     return (
         <div className="ad-details">
-            <img src={image} alt="" />
-            <h2>{title}</h2>
-            <p>{description}</p>
-            <p>{brand}</p>
-            <p>{size}</p>
-            <p>{category}</p>
-            <p>{condition}</p>
-            <p>{city}</p>
+            <div className="img-content">
+                <img src={image} alt="" />
+                <div className="details-content">
+                    <h1>{title}</h1>
+                    <p className="description">{description}</p>
+                    <div className="details-text">
+                        <h3>Brand:</h3>
+                        <span> {brand}</span>
+                    </div>
+                    <div className="details-text">
+                        <h3>Size: </h3> <span>{size}</span>
+                    </div>
+                    <div className="details-text">
+                        <h3>Category: </h3>
+                        <span>{category}</span>
+                    </div>
+                    <div className="details-text">
+                        <h3>Condition: </h3>
+                        <span>{condition}</span>
+                    </div>
+                </div>
+            </div>
 
             {isOwner && (
                 <>

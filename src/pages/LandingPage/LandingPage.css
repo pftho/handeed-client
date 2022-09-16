@@ -1,8 +1,6 @@
 .landing-page {
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    
 }
 
 .landing-hero {
@@ -76,6 +74,10 @@
     .getting-started {
       margin: 2rem ;  
    
+    }
+
+    .getting-started-text {
+        margin: 0 2rem;
     }
 
     .landing-cards {

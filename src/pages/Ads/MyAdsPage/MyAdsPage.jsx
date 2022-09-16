@@ -4,6 +4,7 @@ import { AuthContext } from '../../../context/auth.context';
 import { useContext } from 'react';
 import './MyAdsPage.css';
 import AdCard from '../../../components/adCard/AdCard';
+
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5005';
 
 function MyAdPage() {
@@ -36,28 +37,27 @@ function MyAdPage() {
     };
 
     return (
-        <div>
+        <div className='my-ads'>
             <h1>My ads</h1>
-            <div>
-                <label>My ads</label>
-                <ul>
-                    {user.ads.length ? (
-                        user.ads.map((ad) => {
-                            return (
-                                <div key={ad._id}>
-                                    <AdCard {...ad} />
-                                    <button
-                                        onClick={() => handleCredit(ad._id)}
-                                    >
-                                        Confirm donation
-                                    </button>
-                                </div>
-                            );
-                        })
-                    ) : (
-                        <p>You don't have any ads yet</p>
-                    )}
-                </ul>
+
+            <div className="ads-list my-ads-list">
+                {user.ads.length ? (
+                    user.ads.map((ad) => {
+                        return (
+                            <div key={ad._id} className='my-ad-card'>
+                                <AdCard {...ad} />
+                                <button
+                                    className="confirm-button"
+                                    onClick={() => handleCredit(ad._id)}
+                                >
+                                    Confirm donation
+                                </button>
+                            </div>
+                        );
+                    })
+                ) : (
+                    <p>You don't have any ads yet</p>
+                )}
             </div>
         </div>
     );
