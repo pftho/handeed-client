@@ -3,9 +3,11 @@ import { Link, useParams } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import Chat from '../Chat/Chat';
 import { AuthContext } from '../../context/auth.context';
+import Modal from 'react-modal';
 import axios from 'axios';
 import './AdDetails.css';
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5005';
+Modal.setAppElement('#root');
 
 function AdDetails({
     _id,
@@ -24,7 +26,6 @@ function AdDetails({
     const { isOwner, checkIfOwner, user, setUser, getToken, isLoggedIn } =
         useContext(AuthContext);
     const { adId } = useParams();
-
     const [isChatVisible, setIsChatVisible] = React.useState(false);
 
     useEffect(() => {
@@ -58,42 +59,70 @@ function AdDetails({
         );
     }
 
+    const [modalIsOpen, setModalIsOpen] = React.useState(false);
+
+    const customStyles = {
+        content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+        },
+    };
+
+    function openModal() {
+        setModalIsOpen(true);
+    }
+
+    function closeModal() {
+        setModalIsOpen(false);
+    }
+
     const handleRoomCreation = async () => {
         if (user.credits < 1) {
             window.alert(
                 'You are out of dresses, make a donation to earn more'
             );
+
             return;
         }
 
-        const answer = window.confirm('Use 1 credit to contact this Hander');
+        setModalIsOpen(true);
+    };
 
-        if (answer) {
-            await axios.post(
-                `${API_URL}/api/chat/contact`,
-                {
-                    chatname: title,
-                    sender: user.id,
-                    receiver: owner._id,
-                    ad: _id,
-                    messages: [],
-                },
-                {
-                    headers: { Authorization: `Bearer ${getToken()}` },
-                }
-            );
+    const handlePositiveResponse = async () => {
+        setModalIsOpen(false);
 
-            await axios.put(
-                `${API_URL}/api/profile/user/${user.id}`,
-                { credits: user.credits - 1 },
-                {
-                    headers: { Authorization: `Bearer ${getToken()}` },
-                }
-            );
-            setUser({ ...user, credits: user.credits - 1 });
-            setIsChatVisible(true);
-            onChatOpen();
-        }
+        await axios.put(
+            `${API_URL}/api/profile/user/${user.id}`,
+            { credits: user.credits - 1 },
+            {
+                headers: { Authorization: `Bearer ${getToken()}` },
+            }
+        );
+        setUser({ ...user, credits: user.credits - 1 });
+        setIsChatVisible(true);
+        onChatOpen();
+
+        await axios.post(
+            `${API_URL}/api/chat/contact`,
+            {
+                chatname: title,
+                sender: user.id,
+                receiver: owner._id,
+                ad: _id,
+                messages: [],
+            },
+            {
+                headers: { Authorization: `Bearer ${getToken()}` },
+            }
+        );
+    };
+
+    const handleNegativeResponse = async () => {
+        setModalIsOpen(false);
     };
 
     return (
@@ -124,9 +153,9 @@ function AdDetails({
             {isOwner && (
                 <>
                     <Link to={`/ads/${_id}/edit`}>
-                        <button>Edit this ad</button>
+                        <button className='button'>Edit this ad</button>
                     </Link>
-                    <button onClick={handleDelete}>
+                    <button className='yellow-button' onClick={handleDelete}>
                         <i className="fa-solid fa-trash"></i>
                     </button>
                 </>
@@ -145,10 +174,41 @@ function AdDetails({
                     );
                 })
             ) : isOwner ? null : (
-                <button className="button" onClick={handleRoomCreation}>
+
+                <button
+                    id="chat-btn"
+                    className="contact-btn"
+                    onClick={handleRoomCreation}
+                >
+
                     Chat with owner
                 </button>
             )}
+
+            <Modal
+                style={customStyles}
+                isOpen={modalIsOpen}
+                ariaHideApp={false}
+                onRequestClose={closeModal}
+            >
+                <form className="contact-owner-form-modal">
+                    <h1>Chat with owner</h1>
+                    <button
+                        className="modal-btn"
+                        id="response-yes"
+                        onClick={handlePositiveResponse}
+                    >
+                        Use one dress
+                    </button>
+                    <button
+                        className="modal-btn"
+                        id="response-no"
+                        onClick={handleNegativeResponse}
+                    >
+                        no, thank you{' '}
+                    </button>
+                </form>
+            </Modal>
         </div>
     );
 }
