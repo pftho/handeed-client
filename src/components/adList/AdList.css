@@ -18,7 +18,6 @@
     .ads-list {
         grid-template-columns: repeat(3, 1fr);
         max-width: 1300px;
-        border-radius: 25px;
         grid-row-gap: 50px;
         grid-column-gap: 50px;
         margin-left:  4rem;

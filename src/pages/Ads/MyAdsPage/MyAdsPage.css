@@ -1,0 +1,39 @@
+.my-ads {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.my-ads-list {
+    background-color: antiquewhite;
+    border-radius: 10px;
+}
+
+.my-ad-card {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem;
+    padding: 2rem 4rem;
+    background-color: white;
+    border-radius: 5px;
+
+}
+
+.confirm-button {
+    padding: 1rem;
+    border: none;
+    border-radius: 3px;
+    font-size: 15px;
+    text-align: center;
+    font-family: 'quicksand', 'Roboto', sans-serif;
+    box-shadow: 10px 10px 0px var(--dark);
+    background: linear-gradient(
+        to bottom right,
+        var(--yellow),
+        var(--orange)
+    );
+    color: white;
+    margin: 1rem;
+}
