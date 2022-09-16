@@ -62,15 +62,22 @@
 
 form label {
     margin: 0.3rem 0;
+    font-size: 18px;
 }
 
-form input {
+form input,
+form select {
     box-sizing: border-box;
     font-size: 14px;
     outline: 0;
     padding: 0.5rem;
     width: 100%;
     margin-bottom: 20px;
+}
+
+.file-input-btn {
+    display: flex;
+    flex-direction: column;
 }
 
 .other-auth-link {

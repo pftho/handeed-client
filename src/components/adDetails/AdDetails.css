@@ -1,3 +1,4 @@
+
 .ad-details {
     display: flex;
     flex-direction: column;
@@ -53,4 +54,27 @@
     .details-content {
         margin: 0;
     }
+ }
+
+.contact-btn :hover {
+    background: var(--dark-orange);
+    font-family: 'quicksand', 'Roboto', sans-serif;
+}
+
+.contact-btn {
+    padding: 1rem;
+    border: none;
+    border-radius: 3px;
+    align-self: center;
+    width: 70%;
+    font-size: 15px;
+    font-family: 'quicksand', 'Roboto', sans-serif;
+    box-shadow: 10px 10px 0px var(--dark);
+    background: linear-gradient(
+        to bottom right,
+        var(--orange),
+        var(--dark-orange)
+    );
+    color: white;
+
 }
