@@ -56,7 +56,7 @@ function MyAdPage() {
                         );
                     })
                 ) : (
-                    <p>You don't have any ads yet</p>
+                    <p style={{height: '50vh', padding: '1rem'}}>You don't have any ads yet :(</p>
                 )}
             </div>
         </div>

@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { AuthContext } from '../../context/auth.context';
+import { useContext } from 'react';
 
 function AdressFilter({ ads, setAds, originalAds }) {
     const API_URL = 'http://localhost:5005';
     const [search, setSearch] = useState('');
+    const { user, getToken, setUser } = useContext(AuthContext);
 
     const handleSearch = (e) => setSearch(e.target.value.toLowerCase());
 
@@ -17,7 +20,7 @@ function AdressFilter({ ads, setAds, originalAds }) {
             const storedToken = localStorage.getItem('authToken');
             axios
                 .get(
-                    `${API_URL}/api/location?address=${search}&radius=${10000}`,
+                    `${API_URL}/api/profile/location?address=${search}&radius=${10000}`,
                     {
                         headers: { Authorization: `Bearer ${storedToken}` },
                     }
