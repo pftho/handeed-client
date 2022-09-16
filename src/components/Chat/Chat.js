@@ -75,11 +75,6 @@ function Chat({ username, chat }) {
             setCurrentMessage('');
         }
     };
-    function myFunction() {
-        const chatElement = document.getElementById('chat');
-        let x = chatElement.scrollLeft;
-        let y = chatElement.scrollTop;
-    }
 
     return (
         <div>
@@ -89,7 +84,7 @@ function Chat({ username, chat }) {
                     <p>From: {chat.sender.username}</p>
                     <p>To: {chat.receiver.username}</p>
                 </div>
-                <div id="chat" onscroll="myFunction()">
+                <div id="chat">
                     <div className="chat-render">
                         <div className="message-container">
                             {messages.map((message) => {
