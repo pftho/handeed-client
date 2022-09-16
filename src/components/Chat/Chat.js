@@ -75,7 +75,7 @@ function Chat({ username, chat }) {
             setCurrentMessage('');
         }
     };
-
+    console.log(messages);
     return (
         <div>
             <div className="chat-container">
