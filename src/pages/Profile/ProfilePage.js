@@ -58,16 +58,16 @@ function ProfilePage() {
                 <div className="info-div">
                     <h2>My information</h2>
                     <div className="user-info">
-                        <h3>User Name</h3>
+                        <h3>User Name:</h3>
                         <p>{user.username}</p>
                     </div>
 
                     <div className="user-info">
-                        <h3>Email</h3>
+                        <h3>Email:</h3>
                         <p>{user.email}</p>
                     </div>
                     <div className="user-info">
-                        <h3>Home adress</h3>
+                        <h3>Home address:</h3>
                         <p>{user.address}</p>
                     </div>
                 </div>

@@ -151,14 +151,14 @@ function AdDetails({
             </div>
 
             {isOwner && (
-                <>
+                <div className='edit-delete-btn'>
                     <Link to={`/ads/${_id}/edit`}>
-                        <button className='button'>Edit this ad</button>
+                        <button className='button edit-btn'>Edit this ad</button>
                     </Link>
                     <button className='yellow-button' onClick={handleDelete}>
                         <i className="fa-solid fa-trash"></i>
                     </button>
-                </>
+                </div>
             )}
 
             {map}

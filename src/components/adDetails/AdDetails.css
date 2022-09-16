@@ -40,6 +40,10 @@
     margin: 1rem;
 }
 
+.edit-btn {
+    width: 200px;
+}
+
 @media only screen and (min-width: 1200px) {
     .ad-details {
         margin: 4rem 0;
