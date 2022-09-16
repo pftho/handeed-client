@@ -8,7 +8,7 @@ const AuthContext = React.createContext();
 function AuthProviderWrapper(props) {
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [isLoading, setIsLoaded] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [user, setUser] = useState(null);
     const [isOwner, setIsOwner] = useState(null);
 
@@ -30,7 +30,7 @@ function AuthProviderWrapper(props) {
                     const user = response.data;
                     setUser(user);
                     setIsLoggedIn(true);
-                    setIsLoaded(false);
+                    setIsLoading(false);
                 });
         } else {
             await authenticateUser();
@@ -40,7 +40,7 @@ function AuthProviderWrapper(props) {
     const authenticateUser = async () => {
         const storeToken = localStorage.getItem('authToken');
         if (storeToken) {
-            setIsLoaded(true);
+            setIsLoading(true);
             await axios
                 .get(`${API_URL}/api/auth/verify`, {
                     headers: { Authorization: `Bearer ${storeToken}` },
@@ -57,16 +57,16 @@ function AuthProviderWrapper(props) {
                     const user = response.data;
                     setUser(user);
                     setIsLoggedIn(true);
-                    setIsLoaded(false);
+                    setIsLoading(false);
                 })
                 .catch((err) => {
-                    setIsLoaded(false);
+                    setIsLoading(false);
                     setIsLoggedIn(false);
                     setUser(null);
                 });
         } else {
             setIsLoggedIn(false);
-            setIsLoaded(false);
+            setIsLoading(false);
             setUser(null);
         }
     };

@@ -46,7 +46,11 @@ function ProfilePage() {
                     <img src={localImageUrl || user.imageUrl} alt="profile" />
                     <form onSubmit={handleSubmit}>
                         <input type="file" onChange={handleFileUpload} />
-                        <button type="submit" disabled={!localImageUrl}>
+                        <button
+                            className="update-profile-image-btn"
+                            type="submit"
+                            disabled={!localImageUrl}
+                        >
                             Update
                         </button>
                     </form>
